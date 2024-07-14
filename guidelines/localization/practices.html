@@ -1,0 +1,526 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Maintainer Guidelines" href="../maintainer.html" /><link rel="prev" title="Localization" href="../localization.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
+        <title>Best Practices for Localization - GNUstep Developer Portal</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">GNUstep Developer Portal</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">GNUstep Developer Portal</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction.html">Platform Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Platform Introduction</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../introduction/components.html">Platform Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Platform Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../introduction/overview/libraries.html">Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../introduction/overview/services.html">Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/languages.html">Programming Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/builder.html">GNOME Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/flatpak.html">Flatpak</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../guidelines.html">Guidelines</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../programming.html">Programming Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Programming Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../programming/coding-style.html">C Coding Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../programming/memory-management.html">Managing Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../programming/writing-good-code.html">The Importance of Writing Good Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../programming/optimizing.html">Optimizing GNOME Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../programming/namespacing.html">Namespacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../programming/introspection.html">Introspection</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../accessibility.html">Accessibility</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Accessibility</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../accessibility/coding-guidelines.html">Coding Guidelines for Supporting Accessibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../accessibility/custom-widgets.html">Making Custom Components Accessible</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../localization.html">Localization</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Localization</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Best Practices for Localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../maintainer.html">Maintainer Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Maintainer Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../maintainer/api-stability.html">API Stability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../maintainer/parallel-installability.html">Parallel Installability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../maintainer/integrating.html">Integrating with GNOME</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../devel-docs.html">Developer Documentation Style Guidelines</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://developer.gnome.org/hig/">Human Interface Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/inspector.html">GTK Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/valgrind.html">Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/massif.html">Massif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/sysprof.html">Sysprof</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/guidelines/localization/practices.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="best-practices-for-localization">
+<h1>Best Practices for Localization<a class="headerlink" href="#best-practices-for-localization" title="Permalink to this heading">¶</a></h1>
+<p>These are best practices for application developers to ensure that their
+projects can be localized more easily and more efficiently.</p>
+<section id="use-clear-simple-and-consistent-language">
+<h2>Use clear, simple and consistent language<a class="headerlink" href="#use-clear-simple-and-consistent-language" title="Permalink to this heading">¶</a></h2>
+<p>Using clear, simple and consistent language and terminology is very important.
+Not only does it benefit the users of the American English version of the
+software, it also significantly helps the translation process and in the end the
+users of the localized versions. Please remember that the majority of the
+translators are not native English speakers. Any questions regarding the
+interpretation of the messages in the software may thus result in accidental
+mistranslations and problems for the end user of the localized version. Even if
+the translator does interpret the message correctly, an ambiguous original
+message will often become even more ambiguous when translated.</p>
+<p>Specifically, never use slang, and avoid using abbreviations. These are usually
+exceptionally hard to translate correctly. As an example of these guidelines,
+write “IP number” instead of just “IP” when possible, “character set” instead of
+“charset”, “application” instead of “app”, “the folder /foo” instead of just
+“/foo”, “proxy server” instead of just “proxy”, “information” instead of just
+“info”, “database” instead of just “db”, and “application launcher” instead of
+just “launcher” if that’s what you’re referring to.</p>
+<p>Also try to be consistent. Avoid using different terminology or different
+spellings in different places in your software. As an example, avoid to use
+several variants of “e-mail”, “E-Mail”, “email”, and “Email” simultaneously.
+Also try to be consistent with the terminology of other software and especially
+the ones in the same software project, such as other GNOME software if your
+application is a GNOME application. The <a class="reference external" href="https://developer-old.gnome.org/gdp-style-guide/2.32/wordlist.html">GNOME Word List</a> is an useful resource
+when choosing terminology, and its terminology and spelling should be used
+whenever possible. This helps translators a lot, since they can keep translation
+databases small and still have a useful result when translating other
+applications, if a magnitude of different terminology and different spellings of
+the same terminology can be avoided.</p>
+<p>Messages should be written using American English. Please set (potential)
+personal feelings aside and avoid other spellings than the commonly accepted
+American English ones. Specifically, avoid using British English ones, like
+“colour” and “centre”. Use “color” and “center” instead in the original software
+messages. British English spellings can be, and are, provided by British English
+translations instead, and standardizing on one way of spelling words in original
+messages helps the translation effort for all translators.</p>
+</section>
+<section id="use-a-consistent-typographical-style">
+<h2>Use a consistent typographical style<a class="headerlink" href="#use-a-consistent-typographical-style" title="Permalink to this heading">¶</a></h2>
+<p>Keep in mind that being consistent when designing messages is not only about
+using consistent writing. It’s also about having a consistent use of white space
+and newlines. Every change in white space or the number of trailing newlines in
+otherwise identical messages means additional messages for the translators to
+translate. For this reason, try to avoid trailing spaces and newlines if
+possible. Also, try to be consistent and don’t use white space before colons,
+question marks, exclamation marks and other punctuation marks.</p>
+<p>Also avoid using tabs inside messages. Tabs are often used for alignment inside
+console text messages, but the amount of spacing the tab character (<code class="docutils literal notranslate"><span class="pre">\t</span></code>)
+represents is not easily clear from a visual inspection, and it’s difficult to
+get the correct amount of tabs to use in the translated message in order for the
+translated message to align properly, since the translated words or sentence
+often is of a different length than the original. Please replace tabs with
+spaces inside messages (if you have to use spacing inside the message).</p>
+<p>Standardize capitalization in your messages. The GNOME Human Interface
+Guidelines (HIG) has a chapter on <a class="reference external" href="https://developer.gnome.org/hig/guidelines/writing-style.html#capitalization">typography</a>, with guidelines for when to use
+capitalization and when not to.</p>
+</section>
+<section id="avoid-expanding-acronyms">
+<h2>Avoid expanding acronyms<a class="headerlink" href="#avoid-expanding-acronyms" title="Permalink to this heading">¶</a></h2>
+<p>For better or for worse, the use of Internet and computers today involves the
+use of many acronyms, such as Tag Image File Format (TIFF), Portable Network
+Graphics (PNG), Internet Relay Chat (IRC), Rich Text Format (RTF), and Plain Old
+Documentation (POD). Naturally, applications also have to deal with these in
+their interface messages.</p>
+<p>These things are often widely known by their acronym, and much less so by their
+fully expanded names. Thus, avoid using the fully expanded names in your
+application’s messages. Use the well-known acronym instead. As an example, if
+your application saves images in the PNG format, then say so, instead of saying
+that it saves images in Portable Network Graphics format.</p>
+<p>This problem becomes even more prominent when dealing with translations. The
+acronyms are used across language barriers. A “PNG” image in English or Spanish
+is still referred to as a “PNG” image in Hindi or Japanese. A Japanese user will
+know the file format by its well-known original “PNG” acronym.</p>
+</section>
+<section id="use-comments">
+<h2>Use comments<a class="headerlink" href="#use-comments" title="Permalink to this heading">¶</a></h2>
+<p>Gettext has a nice and very useful feature where any comments in the source code
+that are immediately preceding a message marked for translation, are being
+automatically picked up and displayed as comment in the .po file next to the
+message in question.</p>
+<p>To distinguish developer-related comments from translator-related comments,
+prefix the comment with “Translators”, for instance in a C source file:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Translators: This is a verb, not a noun */</span>
+<span class="n">gtk_label_set_label</span><span class="w"> </span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">(</span><span class="s">&quot;Profile&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>In a <code class="docutils literal notranslate"><span class="pre">GtkBuilder</span></code> UI definition file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;label&quot;</span><span class="w"> </span><span class="na">translatable=</span><span class="s">&quot;yes&quot;</span><span class="w"> </span><span class="na">comments=</span><span class="s">&quot;Translators: This is a verb, not a noun&quot;</span><span class="nt">&gt;</span>Profile<span class="nt">&lt;/property&gt;</span>
+</pre></div>
+</div>
+<p>In a <code class="docutils literal notranslate"><span class="pre">GSettings</span></code> schema:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- Translators: This is a verb, not a noun --&gt;</span>
+<span class="nt">&lt;summary&gt;</span>Profile<span class="nt">&lt;/summary&gt;</span>
+</pre></div>
+</div>
+<p>In a Mallard documentation file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;p</span><span class="w"> </span><span class="na">xmlns:its=</span><span class="s">&quot;http://www.w3.org/2005/11/its&quot;</span><span class="w"> </span><span class="na">its:locNote=</span><span class="s">&quot;Translators: Comment about text to translate.&quot;</span><span class="nt">&gt;</span>Text<span class="w"> </span>to<span class="w"> </span>translate<span class="nt">&lt;/p&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="only-use-valid-utf-8-in-messages">
+<h2>Only use valid UTF-8 in messages<a class="headerlink" href="#only-use-valid-utf-8-in-messages" title="Permalink to this heading">¶</a></h2>
+<p>Try to always keep messages marked for translation in the plain 7-bit ASCII or
+in the UTF-8 character sets. Avoid using any other character sets.</p>
+<p>The reason for this is technical. Since the original strings and their
+translations are stored in the same po files, they need to use a common encoding
+for gettext to be able to function when accessing the translation of a
+particular string. Gettext doesn’t do any character set conversion itself when
+accessing a translation. Plain 7-bit ASCII is the only common subset between
+most encodings, and hence it was traditionally the only choice when writing
+translatable application strings.</p>
+<p>Alternatively, you can as of lately also use UTF-8 in the translatable strings
+of your application. Since all GNOME translations are supposed to be encoded in
+UTF-8, this will also solve the need of using a common encoding.</p>
+</section>
+<section id="do-not-mark-empty-strings-for-translation">
+<h2>Do not mark empty strings for translation<a class="headerlink" href="#do-not-mark-empty-strings-for-translation" title="Permalink to this heading">¶</a></h2>
+<p>In the po format, the empty string (“”) is reserved and has a special use. It is
+always used as the msgid and key for the po file header, and has the po file
+header as its translation in a po file. As such, marking empty strings for
+translation will not work as expected, as the result returned by the gettext ()
+call will be the entire po file header. The solution is to simply <strong>not</strong> mark
+empty strings for translation.</p>
+</section>
+<section id="do-not-hard-code-line-breaks">
+<h2>Do not hard-code line breaks<a class="headerlink" href="#do-not-hard-code-line-breaks" title="Permalink to this heading">¶</a></h2>
+<p>The reasons for this is that making the lines have the appropriate width with
+some variable-width font that is different from the one used when editing is not
+only a difficult task for the developer, it’s also a very difficult task for all
+translators. Also, the danger of line breaks “moving around” when the developer
+changes the hard-coded wrapping (and thus all translations needing updates) is
+eliminated when line breaks are removed.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../maintainer.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Maintainer Guidelines</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../localization.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Localization</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, GNUstep contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Best Practices for Localization</a><ul>
+<li><a class="reference internal" href="#use-clear-simple-and-consistent-language">Use clear, simple and consistent language</a></li>
+<li><a class="reference internal" href="#use-a-consistent-typographical-style">Use a consistent typographical style</a></li>
+<li><a class="reference internal" href="#avoid-expanding-acronyms">Avoid expanding acronyms</a></li>
+<li><a class="reference internal" href="#use-comments">Use comments</a></li>
+<li><a class="reference internal" href="#only-use-valid-utf-8-in-messages">Only use valid UTF-8 in messages</a></li>
+<li><a class="reference internal" href="#do-not-mark-empty-strings-for-translation">Do not mark empty strings for translation</a></li>
+<li><a class="reference internal" href="#do-not-hard-code-line-breaks">Do not hard-code line breaks</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=359c27e9"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    </body>
+</html>

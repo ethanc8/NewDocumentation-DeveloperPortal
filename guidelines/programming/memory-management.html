@@ -1,0 +1,900 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="The Importance of Writing Good Code" href="writing-good-code.html" /><link rel="prev" title="C Coding Style" href="coding-style.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
+        <title>Managing Memory - GNUstep Developer Portal</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">GNUstep Developer Portal</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">GNUstep Developer Portal</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction.html">Platform Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Platform Introduction</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../introduction/components.html">Platform Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Platform Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../introduction/overview/libraries.html">Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../introduction/overview/services.html">Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/languages.html">Programming Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/builder.html">GNOME Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/flatpak.html">Flatpak</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../guidelines.html">Guidelines</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../programming.html">Programming Guidelines</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Programming Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="coding-style.html">C Coding Style</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Managing Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-good-code.html">The Importance of Writing Good Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimizing.html">Optimizing GNOME Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="namespacing.html">Namespacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introspection.html">Introspection</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../accessibility.html">Accessibility</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Accessibility</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../accessibility/coding-guidelines.html">Coding Guidelines for Supporting Accessibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../accessibility/custom-widgets.html">Making Custom Components Accessible</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../localization.html">Localization</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Localization</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../localization/practices.html">Best Practices for Localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../maintainer.html">Maintainer Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Maintainer Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../maintainer/api-stability.html">API Stability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../maintainer/parallel-installability.html">Parallel Installability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../maintainer/integrating.html">Integrating with GNOME</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../devel-docs.html">Developer Documentation Style Guidelines</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://developer.gnome.org/hig/">Human Interface Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/inspector.html">GTK Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/valgrind.html">Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/massif.html">Massif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/sysprof.html">Sysprof</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/guidelines/programming/memory-management.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="managing-memory">
+<h1>Managing Memory<a class="headerlink" href="#managing-memory" title="Permalink to this heading">¶</a></h1>
+<p>The GNOME stack is predominantly written in C, so dynamically allocated memory
+has to be managed manually. Through use of GLib convenience APIs, memory
+management can be trivial, but programmers always need to keep memory in mind
+when writing code.</p>
+<p>It is assumed that the reader is familiar with the idea of heap allocation of
+memory using <code class="docutils literal notranslate"><span class="pre">malloc()</span></code> and <code class="docutils literal notranslate"><span class="pre">free()</span></code>, and knows of the paired GLib
+equivalents, <code class="docutils literal notranslate"><span class="pre">g_malloc()</span></code> and <code class="docutils literal notranslate"><span class="pre">g_free()</span></code>.</p>
+<section id="principles-of-memory-management">
+<h2>Principles of memory management<a class="headerlink" href="#principles-of-memory-management" title="Permalink to this heading">¶</a></h2>
+<p>The normal approach to memory management is for the programmer to keep track of
+which variables point to allocated memory, and to manually free them when they
+are no longer needed. This is correct, but can be clarified by introducing the
+concept of ownership, which is the piece of code (such as a function, struct or
+object) which is responsible for freeing a piece of allocated memory (an
+allocation). Each allocation has exactly one owner; this owner may change as the
+program runs, by transferring ownership to another piece of code. Each variable
+is owned or unowned, according to whether the scope containing it is always its
+owner. Each function parameter and return type either transfers ownership of the
+values passed to it, or it doesn’t. If code which owns some memory doesn’t
+deallocate that memory, that’s a memory leak. If code which doesn’t own some
+memory frees it, that’s a double-free. Both are bad.</p>
+<p>By statically calculating which variables are owned, memory management becomes a
+simple task of unconditionally freeing the owned variables before they leave
+their scope, and not freeing the unowned variables. The key question to answer
+for all memory is: which code has ownership of this memory?</p>
+<p>There is an important restriction here: variables must never change from owned
+to unowned (or vice-versa) at runtime. This restriction is key to simplifying
+memory management.</p>
+<p>For example, consider the functions:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w">  </span><span class="nf">generate_string</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">template</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w">    </span><span class="nf">print_string</span><span class="w">    </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The following code has been annotated to note where the ownership transfers
+happen:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">my_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">template</span><span class="p">;</span><span class="w">  </span><span class="cm">/* unowned */</span>
+<span class="n">GValue</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G_VALUE_INIT</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+<span class="n">g_value_init</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">G_TYPE_STRING</span><span class="p">);</span>
+
+<span class="cm">/* Transfers ownership of a string from the function to the variable. */</span>
+<span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;XXXXXX&quot;</span><span class="p">;</span>
+<span class="n">my_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generate_string</span><span class="w"> </span><span class="p">(</span><span class="n">template</span><span class="p">);</span>
+
+<span class="cm">/* No ownership transfer. */</span>
+<span class="n">print_string</span><span class="w"> </span><span class="p">(</span><span class="n">my_str</span><span class="p">);</span>
+
+<span class="cm">/* Transfer ownership. We no longer have to free @my_str. */</span>
+<span class="n">g_value_take_string</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">my_str</span><span class="p">);</span>
+
+<span class="cm">/* We still have ownership of @value, so free it before it goes out of scope. */</span>
+<span class="n">g_value_unset</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>There are a few points here: Firstly, the ‘owned’ comments by the variable
+declarations denote that those variables are owned by the local scope, and hence
+need to be freed before they go out of scope. The alternative is ‘unowned’,
+which means the local scope does not have ownership, and must not free the
+variables before going out of scope. Similarly, ownership must not be
+transferred to them on assignment.</p>
+<p>Secondly, the variable type modifiers reflect whether they transfer ownership:
+because <code class="docutils literal notranslate"><span class="pre">my_str</span></code> is owned by the local scope, it has type <code class="docutils literal notranslate"><span class="pre">char*</span></code>, whereas
+<code class="docutils literal notranslate"><span class="pre">template</span></code> is <code class="docutils literal notranslate"><span class="pre">const</span></code> to denote it is unowned. Similarly, the <code class="docutils literal notranslate"><span class="pre">template</span></code>
+parameter of <code class="docutils literal notranslate"><span class="pre">generate_string()</span></code> and the <code class="docutils literal notranslate"><span class="pre">str</span></code> parameter of
+<code class="docutils literal notranslate"><span class="pre">print_string()</span></code> are marked as <code class="docutils literal notranslate"><span class="pre">const</span></code> because no ownership is transferred
+when those functions are called. As ownership is transferred for the string
+parameter of <code class="docutils literal notranslate"><span class="pre">g_value_take_string()</span></code>, we can expect its type to be gchar.</p>
+<p>(Note that this is not the case for GObject instances and subclasses, which can
+never be <code class="docutils literal notranslate"><span class="pre">const</span></code>. It is only the case for strings and simple structs.)</p>
+<p>Finally, a few libraries use a function naming convention to indicate ownership
+transfer, for example using ‘take’ in a function name to indicate full transfer
+of parameters, as with <code class="docutils literal notranslate"><span class="pre">g_value_take_string()</span></code>.</p>
+<p>Note that different libraries use different conventions, as shown below:</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function name</p></th>
+<th class="head"><p>Convention 1 (standard)</p></th>
+<th class="head"><p>Convention 2 (alternate)</p></th>
+<th class="head"><p>Convention 3 (<code class="docutils literal notranslate"><span class="pre">gdbus-codegen</span></code>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p>transfer: none</p></td>
+<td><p>any transfer</p></td>
+<td><p>transfer: full</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dup</span></code></p></td>
+<td><p>transfer: full</p></td>
+<td><p>unused</p></td>
+<td><p>unused</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">peek</span></code></p></td>
+<td><p>unused</p></td>
+<td><p>unused</p></td>
+<td><p>transfer: none</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p>transfer: none</p></td>
+<td><p>transfer: none</p></td>
+<td><p>transfer: none</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">take</span></code></p></td>
+<td><p>transfer: full</p></td>
+<td><p>unused</p></td>
+<td><p>unused</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">steal</span></code></p></td>
+<td><p>transfer: full</p></td>
+<td><p>transfer: full</p></td>
+<td><p>transfer: full</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ideally, all functions have a <code class="docutils literal notranslate"><span class="pre">(transfer)</span></code> introspection annotation for all
+relevant parameters and the return value. Failing that, here is a set of
+guidelines to use to determine whether ownership of a return value is
+transferred:</p>
+<ol class="arabic simple">
+<li><p>If the type has an introspection <code class="docutils literal notranslate"><span class="pre">(transfer)</span></code> annotation, look at that.</p></li>
+<li><p>Otherwise, if the type is const, there is no transfer.</p></li>
+<li><p>Otherwise, if the function documentation explicitly specifies the return
+value must be freed, there is full or container transfer.</p></li>
+<li><p>Otherwise, if the function is named ‘dup’, ‘take’ or ‘steal’, there is full
+or container transfer.</p></li>
+<li><p>Otherwise, if the function is named ‘peek’, there is no transfer.</p></li>
+<li><p>Otherwise, you need to look at the function’s code to determine whether it
+intends ownership to be transferred. Then file a bug against the
+documentation for that function, and ask for an introspection annotation
+to be added.</p></li>
+</ol>
+<p>Given this ownership and transfer infrastructure, the correct approach to memory
+allocation can be mechanically determined for each situation. In each case, the
+<code class="docutils literal notranslate"><span class="pre">copy()</span></code> function must be appropriate to the data type, for example
+<code class="docutils literal notranslate"><span class="pre">g_strdup()</span></code> for strings, or <code class="docutils literal notranslate"><span class="pre">g_object_ref()</span></code> for GObjects.</p>
+<p>When thinking about ownership transfer, <code class="docutils literal notranslate"><span class="pre">malloc()</span></code>/<code class="docutils literal notranslate"><span class="pre">free()</span></code> and reference
+counting are equivalent: in the former case, a newly allocated piece of heap
+memory is transferred; in the latter, a newly incremented reference.</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">¶</a></h2>
+<p>Documenting the ownership transfer for each function parameter and return, and
+the ownership for each variable, is important. While they may be clear when
+writing the code, they are not clear a few months later; and may never be clear
+to users of an API. They should always be documented.</p>
+<p>The best way to document ownership transfer is to use the <code class="docutils literal notranslate"><span class="pre">(transfer)</span></code>
+annotation introduced by <a class="reference external" href="https://gi.readthedocs.io/en/latest/annotations/giannotations.html#memory-and-lifecycle-management">gobject-introspection</a>. Include this in the API
+documentation comment for each function parameter and return type. By doing so,
+the introspection tools can also read the annotations and use them to correctly
+introspect the API.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If a function is not public API, write a documentation comment for it anyway
+and include the <code class="docutils literal notranslate"><span class="pre">(transfer)</span></code> annotations. This will help you and other
+people working on your code.</p>
+</div>
+<p>For example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * g_value_take_string:</span>
+<span class="cm"> * @value: (transfer none): an initialized #GValue</span>
+<span class="cm"> * @str: (transfer full): string to set it to</span>
+<span class="cm"> *</span>
+<span class="cm"> * Function documentation goes here.</span>
+<span class="cm"> */</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * generate_string:</span>
+<span class="cm"> * @template: (transfer none): a template to follow when generating the string</span>
+<span class="cm"> *</span>
+<span class="cm"> * Function documentation goes here.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Returns: (transfer full): a newly generated string</span>
+<span class="cm"> */</span>
+</pre></div>
+</div>
+<p>Ownership for variables can be documented using inline comments. These are
+non-standard, and not read by any tools, but can form a convention if used
+consistently:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">GObject</span><span class="w"> </span><span class="o">*</span><span class="n">some_owned_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+<span class="n">GObject</span><span class="w"> </span><span class="o">*</span><span class="n">some_unowned_object</span><span class="p">;</span><span class="w">  </span><span class="cm">/* unowned */</span>
+</pre></div>
+</div>
+<p>The documentation for container types is similarly only a convention; it
+includes the type of the contained elements too:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* PtrArray&lt;owned char*&gt; */</span>
+<span class="n">GPtrArray</span><span class="w"> </span><span class="o">*</span><span class="n">some_unowned_string_array</span><span class="p">;</span><span class="w">  </span><span class="cm">/* unowned */</span>
+
+<span class="cm">/* PtrArray&lt;owned char*&gt; */</span>
+<span class="n">GPtrArray</span><span class="w"> </span><span class="o">*</span><span class="n">some_owned_string_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+
+<span class="cm">/* PtrArray&lt;owned GObject*&gt; */</span>
+<span class="n">GPtrArray</span><span class="w"> </span><span class="o">*</span><span class="n">some_owned_object_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+</pre></div>
+</div>
+<p>Note also that owned variables should always be initialized so that freeing them is more convenient.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some types, for example basic C types like strings, can have the <code class="docutils literal notranslate"><span class="pre">const</span></code>
+modifier added if they are unowned, to take advantage of compiler warnings
+resulting from assigning those variables to owned variables (which must
+<strong>not</strong> use the <code class="docutils literal notranslate"><span class="pre">const</span></code> modifier). If so, the <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">unowned</span> <span class="pre">*/</span></code> comment may
+be omitted.</p>
+</div>
+</section>
+<section id="reference-counting">
+<h2>Reference counting<a class="headerlink" href="#reference-counting" title="Permalink to this heading">¶</a></h2>
+<p>As well as conventional <code class="docutils literal notranslate"><span class="pre">malloc()</span></code>/<code class="docutils literal notranslate"><span class="pre">free()</span></code>-style types, GLib has various
+reference counted types — GObject being a prime example.</p>
+<p>The concepts of ownership and transfer apply just as well to reference counted
+types as they do to allocated types. A scope owns a reference counted type if it
+holds a strong reference to the instance (for example by calling
+<code class="docutils literal notranslate"><span class="pre">g_object_ref()</span></code>). An instance can be ‘copied’ by calling <code class="docutils literal notranslate"><span class="pre">g_object_ref()</span></code>
+again.  Ownership can be released with <code class="docutils literal notranslate"><span class="pre">g_object_unref()</span></code> — even though this
+may not actually finalize the instance, it frees the current scope’s ownership
+of that instance.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>See <code class="docutils literal notranslate"><span class="pre">g_clear_object()</span></code> for a convenient way of handling GObject references.</p>
+</div>
+<p>There are other reference counted types in GLib, such as <code class="docutils literal notranslate"><span class="pre">GHashTable</span></code> (using
+<code class="docutils literal notranslate"><span class="pre">g_hash_table_ref()</span></code> and <code class="docutils literal notranslate"><span class="pre">g_hash_table_unref()</span></code>), or <code class="docutils literal notranslate"><span class="pre">GVariant</span></code>
+(<code class="docutils literal notranslate"><span class="pre">g_variant_ref()</span></code>, <code class="docutils literal notranslate"><span class="pre">g_variant_unref()</span></code>). For historical reasons, some
+types, like <code class="docutils literal notranslate"><span class="pre">GHashTable</span></code>, support both reference counting and explicit
+finalization. Reference counting should always be used in preference, because it
+allows instances to be easily shared between multiple scopes (each holding their
+own reference) without having to allocate multiple copies of the instance. This
+saves memory.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>GLib <a class="reference external" href="https://docs.gtk.org/glib/reference-counting.html">provides API</a>
+for easily implementing reference counted types, in the form of
+<code class="docutils literal notranslate"><span class="pre">g_rc_box_new()</span></code> and <code class="docutils literal notranslate"><span class="pre">g_atomic_rc_box_new()</span></code>.</p>
+</div>
+<section id="floating-references">
+<h3>Floating references<a class="headerlink" href="#floating-references" title="Permalink to this heading">¶</a></h3>
+<p>Classes which are derived from <code class="docutils literal notranslate"><span class="pre">GInitiallyUnowned</span></code>, as opposed to GObject,
+have an initial reference which is <em>floating</em>, meaning that no code owns the
+reference. As soon as <code class="docutils literal notranslate"><span class="pre">g_object_ref_sink()</span></code> is called on the object, the
+floating reference is converted to a strong reference, and the calling code
+assumes ownership of the object.</p>
+<p>Floating references are a convenience for use in C in APIs, such as GTK, where
+large numbers of objects must be created and organized into a hierarchy. In
+these cases, calling <code class="docutils literal notranslate"><span class="pre">g_object_unref()</span></code> to drop all the strong references would
+result in a lot of code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Without</span> <span class="n">floating</span> <span class="n">references</span>
+<span class="n">GtkWidget</span> <span class="o">*</span><span class="n">new_widget</span><span class="p">;</span>
+
+<span class="n">new_widget</span> <span class="o">=</span> <span class="n">gtk_some_widget_new</span> <span class="p">();</span>
+<span class="n">gtk_container_add</span> <span class="p">(</span><span class="n">some_container</span><span class="p">,</span> <span class="n">new_widget</span><span class="p">);</span>
+<span class="n">g_object_unref</span> <span class="p">(</span><span class="n">new_widget</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">With</span> <span class="n">floating</span> <span class="n">references</span>
+<span class="n">gtk_container_add</span> <span class="p">(</span><span class="n">some_container</span><span class="p">,</span> <span class="n">gtk_some_widget_new</span> <span class="p">());</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that g_object_ref_sink() is equivalent to g_object_ref() when called on
+a non-floating reference, making gtk_container_add() no different from any
+other function in such cases.</p>
+</div>
+<p>Floating references are only used by a few APIs — in particular, <code class="docutils literal notranslate"><span class="pre">GtkWidget</span></code>
+and all its subclasses, or <code class="docutils literal notranslate"><span class="pre">GVariant</span></code>. You must learn which APIs support it,
+and which APIs consume floating references, and only use them together.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When designing the API of newer libraries you should <strong>not</strong> use floating
+references, as they require special handling inside language bindings.</p>
+</div>
+<p>Floating references can be effectively replaced by having your
+<code class="docutils literal notranslate"><span class="pre">container_add()</span></code> function transfer the ownership of the object you are
+adding, and annotating the argument using <code class="docutils literal notranslate"><span class="pre">(transfer</span> <span class="pre">full)</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * your_container_add:</span>
+<span class="cm"> * @container: a container object</span>
+<span class="cm"> * @element: (transfer full): the element to add</span>
+<span class="cm"> *</span>
+<span class="cm"> * Adds a new element to a container.</span>
+<span class="cm"> */</span>
+<span class="w"> </span><span class="kt">void</span>
+<span class="w"> </span><span class="nf">your_container_add</span><span class="w"> </span><span class="p">(</span><span class="n">YourContainer</span><span class="w"> </span><span class="o">*</span><span class="n">container</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">YourElement</span><span class="w">   </span><span class="o">*</span><span class="n">element</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">g_ptr_array_add</span><span class="w"> </span><span class="p">(</span><span class="n">container</span><span class="o">-&gt;</span><span class="n">elements</span><span class="p">,</span><span class="w"> </span><span class="n">element</span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="convenience-functions">
+<h2>Convenience functions<a class="headerlink" href="#convenience-functions" title="Permalink to this heading">¶</a></h2>
+<p>GLib provides various convenience functions for memory management, especially
+for GObjects. Three will be covered here, but others exist — check the GLib API
+documentation for more. They typically follow similar naming schemas to these
+three (using ‘_full’ suffixes, or the verb ‘clear’ in the function name).</p>
+<section id="g-clear-pointer">
+<h3><code class="docutils literal notranslate"><span class="pre">g_clear_pointer()</span></code><a class="headerlink" href="#g-clear-pointer" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">g_clear_pointer()</span></code> is a function which frees the contents of a pointer, using
+the given <code class="docutils literal notranslate"><span class="pre">GDestroyNotify</span></code> function, and then clears the pointer by setting it
+to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The C standard guarantees that <code class="docutils literal notranslate"><span class="pre">free()</span></code> is always <code class="docutils literal notranslate"><span class="pre">NULL</span></code>-safe, and so
+does GLib for <code class="docutils literal notranslate"><span class="pre">g_free()</span></code>. Nevertheless, there is no guarantee made for any
+other free function to be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>-safe, so it’s recommended to use
+<code class="docutils literal notranslate"><span class="pre">g_clear_pointer()</span></code> to avoid use-after-free issues.</p>
+</div>
+</section>
+<section id="g-clear-object">
+<h3><code class="docutils literal notranslate"><span class="pre">g_clear_object()</span></code><a class="headerlink" href="#g-clear-object" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">g_clear_object()</span></code> is a version of <code class="docutils literal notranslate"><span class="pre">g_object_unref()</span></code> which unrefs a GObject
+and then clears the pointer to it to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+<p>This makes it easier to implement code that guarantees a GObject pointer is
+always either <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, or has ownership of a GObject (but which never points to
+a GObject it no longer owns).</p>
+<p>By initialising all owned GObject pointers to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, freeing them at the end
+of the scope is as simple as calling <code class="docutils literal notranslate"><span class="pre">g_clear_object()</span></code> without any checks:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span>
+<span class="nf">my_function</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">GObject</span><span class="w"> </span><span class="o">*</span><span class="n">some_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rand</span><span class="w"> </span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">some_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_new_object</span><span class="w"> </span><span class="p">();</span>
+<span class="w">      </span><span class="cm">/* do something with the object */</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">g_clear_object</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">some_object</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="g-list-free-full-and-g-slist-free-full">
+<h3><code class="docutils literal notranslate"><span class="pre">g_list_free_full()</span></code> and <code class="docutils literal notranslate"><span class="pre">g_slist_free_full()</span></code><a class="headerlink" href="#g-list-free-full-and-g-slist-free-full" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">g_list_free_full()</span></code> and <code class="docutils literal notranslate"><span class="pre">g_slist_free_full()</span></code> free all the elements in a
+linked list, and all their data. It is much more convenient than iterating
+through the list to free all the elements’ data, then calling <code class="docutils literal notranslate"><span class="pre">g_list_free()</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">g_slist_free()</span></code> to free the list elements themselves.</p>
+</section>
+<section id="g-hash-table-new-full">
+<h3><code class="docutils literal notranslate"><span class="pre">g_hash_table_new_full()</span></code><a class="headerlink" href="#g-hash-table-new-full" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">g_hash_table_new_full()</span></code> is a version of <code class="docutils literal notranslate"><span class="pre">g_hash_table_new()</span></code> which allows
+setting functions to destroy each key and value in the hash table when they are
+removed. These functions are then automatically called for all keys and values
+when the hash table is destroyed, or when an entry is removed using
+<code class="docutils literal notranslate"><span class="pre">g_hash_table_remove()</span></code>.</p>
+<p>Essentially, it simplifies memory management of keys and values to the question
+of whether they are present in the hash table.</p>
+<p>Similar functions exist for <code class="docutils literal notranslate"><span class="pre">GPtrArray</span></code> and <code class="docutils literal notranslate"><span class="pre">GArray</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">g_ptr_array_new_with_free_func()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">g_array_set_clear_func()</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="container-types">
+<h2>Container types<a class="headerlink" href="#container-types" title="Permalink to this heading">¶</a></h2>
+<p>When using container types, such as <code class="docutils literal notranslate"><span class="pre">GPtrArray</span></code> or <code class="docutils literal notranslate"><span class="pre">GList</span></code>, an additional
+level of ownership is introduced: as well as the ownership of the container
+instance, each element in the container is either owned or unowned too. By
+nesting containers, multiple levels of ownership must be tracked. Ownership of
+owned elements belongs to the container; ownership of the container belongs to
+the scope it’s in (which may be another container).</p>
+<p>A key principle for simplifying this is to ensure that all elements in a
+container have the same ownership: they are either all owned, or all unowned.
+This happens automatically if the normal convenience functions are used for
+types like <code class="docutils literal notranslate"><span class="pre">GPtrArray</span></code> and <code class="docutils literal notranslate"><span class="pre">GHashTable</span></code>.</p>
+<p>If elements in a container are owned, adding them to the container is
+essentially an ownership transfer. For example, for an array of strings, if the
+elements are owned, the definition of <code class="docutils literal notranslate"><span class="pre">g_ptr_array_add()</span></code> is effectively:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * g_ptr_array_add:</span>
+<span class="cm"> * @array: a #GPtrArray</span>
+<span class="cm"> * @str: (transfer full): string to add</span>
+<span class="cm"> */</span>
+<span class="kt">void</span>
+<span class="nf">g_ptr_array_add</span><span class="w"> </span><span class="p">(</span><span class="n">GPtrArray</span><span class="w"> </span><span class="o">*</span><span class="n">array</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">gchar</span><span class="w">     </span><span class="o">*</span><span class="n">str</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>So, for example, constant (unowned) strings must be added to the array using
+<code class="docutils literal notranslate"><span class="pre">g_ptr_array_add</span> <span class="pre">(array,</span> <span class="pre">g_strdup</span> <span class="pre">(&quot;constant</span> <span class="pre">string&quot;))</span></code>.</p>
+<p>Whereas if the elements are unowned, the definition is effectively:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * g_ptr_array_add:</span>
+<span class="cm"> * @array: a #GPtrArray</span>
+<span class="cm"> * @str: (transfer none): string to add</span>
+<span class="cm"> */</span>
+<span class="kt">void</span>
+<span class="nf">g_ptr_array_add</span><span class="w"> </span><span class="p">(</span><span class="n">GPtrArray</span><span class="w">   </span><span class="o">*</span><span class="n">array</span><span class="p">,</span>
+<span class="w">                 </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Here, constant strings can be added without copying them: <code class="docutils literal notranslate"><span class="pre">g_ptr_array_add</span> <span class="pre">(array,</span> <span class="pre">&quot;constant</span> <span class="pre">string&quot;)</span></code>.</p>
+</section>
+<section id="single-path-cleanup">
+<span id="id1"></span><h2>Single-path cleanup<a class="headerlink" href="#single-path-cleanup" title="Permalink to this heading">¶</a></h2>
+<p>A useful design pattern for more complex functions is to have a single control
+path which cleans up (frees) allocations and returns to the caller. This vastly
+simplifies tracking of allocations, as it’s no longer necessary to mentally work
+out which allocations have been freed on each code path — all code paths end at
+the same point, so perform all the frees then. The benefits of this approach
+rapidly become greater for larger functions with more owned local variables; it
+may not make sense to apply the pattern to smaller functions.</p>
+<p>This approach has two requirements:</p>
+<ol class="arabic simple">
+<li><p>The function returns from a single point, and uses <code class="docutils literal notranslate"><span class="pre">goto</span></code> to reach that
+point from other paths.</p></li>
+<li><p>All owned variables are set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> when initialized or when ownership
+is transferred away from them.</p></li>
+</ol>
+<p>The example below is for a small function (for brevity), but should illustrate
+the principles for application of the pattern to larger functions:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">GObject</span><span class="w"> </span><span class="o">*</span>
+<span class="nf">some_function</span><span class="w"> </span><span class="p">(</span><span class="n">GError</span><span class="w"> </span><span class="o">**</span><span class="n">error</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">some_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+<span class="w">  </span><span class="n">GObject</span><span class="w"> </span><span class="o">*</span><span class="n">temp_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">temp_str</span><span class="p">;</span>
+<span class="w">  </span><span class="n">GObject</span><span class="w"> </span><span class="o">*</span><span class="n">my_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+<span class="w">  </span><span class="n">GError</span><span class="w"> </span><span class="o">*</span><span class="n">child_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+
+<span class="w">  </span><span class="n">temp_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generate_object</span><span class="w"> </span><span class="p">();</span>
+<span class="w">  </span><span class="n">temp_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;example string&quot;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rand</span><span class="w"> </span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">some_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_strconcat</span><span class="w"> </span><span class="p">(</span><span class="n">temp_str</span><span class="p">,</span><span class="w"> </span><span class="n">temp_str</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">some_operation_which_might_fail</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">child_error</span><span class="p">);</span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">child_error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">goto</span><span class="w"> </span><span class="n">done</span><span class="p">;</span>
+
+<span class="w">      </span><span class="n">my_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generate_wrapped_object</span><span class="w"> </span><span class="p">(</span><span class="n">temp_object</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="nl">done</span><span class="p">:</span>
+<span class="w">  </span><span class="cm">/* Here, @some_str is either NULL or a string to be freed, so can be passed to</span>
+<span class="cm">   * g_free() unconditionally.</span>
+<span class="cm">   *</span>
+<span class="cm">   * Similarly, @temp_object is either NULL or an object to be unreffed, so can</span>
+<span class="cm">   * be passed to g_clear_object() unconditionally.</span>
+<span class="cm">   */</span>
+<span class="w">  </span><span class="n">g_free</span><span class="w"> </span><span class="p">(</span><span class="n">some_str</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_clear_object</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">temp_object</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* The pattern can also be used to ensure that the function always returns</span>
+<span class="cm">   * either an error or a return value (but never both).</span>
+<span class="cm">   */</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">child_error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">g_propagate_error</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">child_error</span><span class="p">);</span>
+<span class="w">      </span><span class="n">g_clear_object</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_object</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">my_object</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are writing code that targets GCC or other GCC-compatible compilers
+and will not be ported to other platforms, you can avoid the use of <code class="docutils literal notranslate"><span class="pre">goto</span></code>
+by using the <code class="docutils literal notranslate"><span class="pre">g_autoptr</span></code> macro that GLib <a class="reference external" href="https://developer-old.gnome.org/glib/stable/glib-Miscellaneous-Macros.html#g-autoptr">provides</a>.</p>
+</div>
+</section>
+<section id="verification">
+<h2>Verification<a class="headerlink" href="#verification" title="Permalink to this heading">¶</a></h2>
+<p>Memory leaks can be checked for in two ways: static analysis, and runtime leak
+checking.</p>
+<p>Static analysis with tools like Coverity, the Clang static analyzer or <a class="reference external" href="https://gitlab.freedesktop.org/tartan/tartan">Tartan</a> can catch some leaks, but
+require knowledge of the ownership transfer of every function called in the
+code. Domain-specific static analyzers like Tartan (which knows about GLib
+memory allocation and transfer) can perform better here, but Tartan is quite a
+young project and still misses things (a low true positive rate). It is
+recommended that code be put through a static analyzer, but the primary tool for
+detecting leaks should be runtime leak checking.</p>
+<p>Runtime leak checking is done using Valgrind, using its memcheck tool. Any leak
+it detects as ‘definitely losing memory’ should be fixed. Many of the leaks
+which ‘potentially’ lose memory are not real leaks, and should be added to the
+suppression file.</p>
+<p>If compiling with a recent version of Clang or GCC, the address sanitizer can be
+enabled instead, and it will detect memory leaks and overflow problems at
+runtime, but without the difficulty of running Valgrind in the right
+environment. Note, however, that it is still a young tool, so may fail in some
+cases.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="writing-good-code.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">The Importance of Writing Good Code</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="coding-style.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">C Coding Style</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, GNUstep contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Managing Memory</a><ul>
+<li><a class="reference internal" href="#principles-of-memory-management">Principles of memory management</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#reference-counting">Reference counting</a><ul>
+<li><a class="reference internal" href="#floating-references">Floating references</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#convenience-functions">Convenience functions</a><ul>
+<li><a class="reference internal" href="#g-clear-pointer"><code class="docutils literal notranslate"><span class="pre">g_clear_pointer()</span></code></a></li>
+<li><a class="reference internal" href="#g-clear-object"><code class="docutils literal notranslate"><span class="pre">g_clear_object()</span></code></a></li>
+<li><a class="reference internal" href="#g-list-free-full-and-g-slist-free-full"><code class="docutils literal notranslate"><span class="pre">g_list_free_full()</span></code> and <code class="docutils literal notranslate"><span class="pre">g_slist_free_full()</span></code></a></li>
+<li><a class="reference internal" href="#g-hash-table-new-full"><code class="docutils literal notranslate"><span class="pre">g_hash_table_new_full()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#container-types">Container types</a></li>
+<li><a class="reference internal" href="#single-path-cleanup">Single-path cleanup</a></li>
+<li><a class="reference internal" href="#verification">Verification</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=359c27e9"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    </body>
+</html>

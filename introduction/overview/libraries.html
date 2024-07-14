@@ -1,0 +1,696 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Services" href="services.html" /><link rel="prev" title="Platform Components" href="../components.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
+        <title>Libraries - GNUstep Developer Portal</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">GNUstep Developer Portal</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">GNUstep Developer Portal</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../introduction.html">Platform Introduction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Platform Introduction</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../components.html">Platform Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Platform Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services.html">Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../languages.html">Programming Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../builder.html">GNOME Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flatpak.html">Flatpak</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../guidelines.html">Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../guidelines/programming.html">Programming Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Programming Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/programming/coding-style.html">C Coding Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/programming/memory-management.html">Managing Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/programming/writing-good-code.html">The Importance of Writing Good Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/programming/optimizing.html">Optimizing GNOME Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/programming/namespacing.html">Namespacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/programming/introspection.html">Introspection</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../guidelines/accessibility.html">Accessibility</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Accessibility</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/accessibility/coding-guidelines.html">Coding Guidelines for Supporting Accessibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/accessibility/custom-widgets.html">Making Custom Components Accessible</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../guidelines/localization.html">Localization</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Localization</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/localization/practices.html">Best Practices for Localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../guidelines/maintainer.html">Maintainer Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Maintainer Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/maintainer/api-stability.html">API Stability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/maintainer/parallel-installability.html">Parallel Installability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guidelines/maintainer/integrating.html">Integrating with GNOME</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guidelines/devel-docs.html">Developer Documentation Style Guidelines</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://developer.gnome.org/hig/">Human Interface Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/inspector.html">GTK Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/valgrind.html">Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/massif.html">Massif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools/sysprof.html">Sysprof</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/introduction/overview/libraries.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="libraries">
+<h1>Libraries<a class="headerlink" href="#libraries" title="Permalink to this heading">¶</a></h1>
+<p>An overview of GNOME platform libraries.</p>
+<section id="user-interfaces">
+<h2>User Interfaces<a class="headerlink" href="#user-interfaces" title="Permalink to this heading">¶</a></h2>
+<p>GNOME’s user interface libraries are used by all GNOME applications. They
+provide everything you need to create a beautiful and easy to use interface for
+your app.</p>
+<section id="gtk">
+<h3>GTK<a class="headerlink" href="#gtk" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://www.gtk.org">GTK</a> is GNOME’s user interface toolkit, and is a
+comprehensive resource for creating application user interfaces. It includes
+a wide range of user interface widgets, as well as providing access to an array
+of system-level features.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.gtk.org/gtk4/">GTK4 API reference</a></p></li>
+</ul>
+</section>
+<section id="libadwaita">
+<h3>libadwaita<a class="headerlink" href="#libadwaita" title="Permalink to this heading">¶</a></h3>
+<p>Libadwaita supplements GTK with additional widgets and classes. It is used to
+implement the standard GNOME design patterns as documented in the GNOME
+Human Interface Guidelines.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gnome.pages.gitlab.gnome.org/libadwaita/doc/">Libadwaita API reference</a></p></li>
+</ul>
+</section>
+<section id="webkitgtk">
+<h3>WebKitGTK<a class="headerlink" href="#webkitgtk" title="Permalink to this heading">¶</a></h3>
+<p>WebKitGTK allows adding web functionality to applications, such as HTML
+rendering and embedded web views.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://webkitgtk.org/reference/webkit2gtk/stable/index.html">WebKitGTK API reference</a></p></li>
+</ul>
+</section>
+</section>
+<section id="fonts-rendering">
+<h2>Fonts &amp; Rendering<a class="headerlink" href="#fonts-rendering" title="Permalink to this heading">¶</a></h2>
+<p>Simple text display and styling is provided by GTK. The GNOME platform also
+includes a set of lower-level font rendering and layout libraries, which apps
+may sometimes need to use directly for more specialised font and typographic functionality.</p>
+<section id="fontconfig">
+<h3>Fontconfig<a class="headerlink" href="#fontconfig" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://www.freedesktop.org/wiki/Software/fontconfig/">Fontconfig</a> provides
+access to the fonts that are available on the system. It provides detailed
+information about available fonts, as well as the ability to match fonts
+according to criteria such as language coverage.</p>
+</section>
+<section id="freetype">
+<h3>FreeType<a class="headerlink" href="#freetype" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://www.freetype.org/">FreeType</a> is a font rendering library used by
+the GNOME platform. Most applications are unlikely to need to use FreeType
+directly. However, it can be useful for specialist font and typographic
+features.</p>
+</section>
+<section id="harfbuzz">
+<h3>HarfBuzz<a class="headerlink" href="#harfbuzz" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://harfbuzz.github.io/">HarfBuzz</a> is a text shaping library that is
+used by the GNOME platform. Most apps are unlikely to need to use HarfBuzz
+directly, unless they include font or typographic features.</p>
+</section>
+<section id="pango">
+<h3>Pango<a class="headerlink" href="#pango" title="Permalink to this heading">¶</a></h3>
+<p>Pango is a text layout library. It plays an important role in
+internationalization, has full Unicode support, and supports a range of writing
+systems. Pango APIs are exposed through GTK and can be used for things like
+setting text as bold or italic.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.gtk.org/Pango/">Pango API reference</a></p></li>
+<li><p><a class="reference external" href="https://docs.gtk.org/PangoCairo/">Pango Cairo API reference</a></p></li>
+</ul>
+</section>
+</section>
+<section id="image-loading">
+<h2>Image Loading<a class="headerlink" href="#image-loading" title="Permalink to this heading">¶</a></h2>
+<section id="gdk-pixbuf">
+<h3>gdk-pixbuf<a class="headerlink" href="#gdk-pixbuf" title="Permalink to this heading">¶</a></h3>
+<p>gdk-pixbuf is an image loading library which is used by GTK. For simple loading
+and display of images, GTK can typically used on its own. However, gdk-pixbuf
+does provide useful functionality for operating on images as pixel buffers,
+such as changing colors or creating composites from multiple images, and saving
+the result.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.gtk.org/gdk-pixbuf/">gdk-pixbuf API reference</a></p></li>
+</ul>
+</section>
+<section id="librsvg">
+<h3>librsvg<a class="headerlink" href="#librsvg" title="Permalink to this heading">¶</a></h3>
+<p>librsvg is a library that renders Scalable Vector Graphics (SVG).  It
+can be used to display static SVG assets from GTK and gdk-pixbuf, or
+to render SVG documents to <a class="reference external" href="https://cairographics.org">Cairo</a> surfaces in general.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/index.html">librsvg API reference</a></p></li>
+</ul>
+</section>
+<section id="glycin">
+<h3>glycin<a class="headerlink" href="#glycin" title="Permalink to this heading">¶</a></h3>
+<p>Glycin allows to decode images into <a class="reference external" href="https://docs.gtk.org/gdk4/class.Texture.html">GdkTextures</a> and to extract image metadata.
+The image decoding happens in sandboxed, modular image loaders.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gitlab.gnome.org/sophie-h/glycin">Glycin project page</a></p></li>
+<li><p><a class="reference external" href="https://docs.rs/glycin/latest/glycin/">Glycin Rust API reference</a></p></li>
+<li><p><a class="reference external" href="https://sophie-h.pages.gitlab.gnome.org/glycin/c-api/">Glycin C API reference</a></p></li>
+</ul>
+</section>
+</section>
+<section id="d-drawing-cairo">
+<h2>2D Drawing: Cairo<a class="headerlink" href="#d-drawing-cairo" title="Permalink to this heading">¶</a></h2>
+<p>Cairo can be used to draw custom 2D graphics. These can be embedded in GTK
+user interfaces, by drawing on GTK widgets. Graphics can also be outputted to
+PDF and SVG. Cairo graphics are resolution-independent and antialiased.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cairographics.org/manual/">Cairo API reference</a></p></li>
+</ul>
+</section>
+<section id="file-system-access-operations-gfile">
+<h2>File System Access &amp; Operations: GFile<a class="headerlink" href="#file-system-access-operations-gfile" title="Permalink to this heading">¶</a></h2>
+<p>GIO provides a powerful virtual file system abstraction layer. Its GFile
+interface can be used to read information from the filesystem (such as
+traversing directories, querying file metadata, and so on) as well as and
+carrying out file operations. GFile can also be used to monitor files and
+directories for changes.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.gtk.org/gio/iface.File.html">GFile API Reference</a></p></li>
+</ul>
+</section>
+<section id="ipc-gdbus">
+<h2>IPC: GDBus<a class="headerlink" href="#ipc-gdbus" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.freedesktop.org/wiki/Software/dbus/">D-Bus</a> is one of the
+primary IPC systems used in GNOME, and is used for communication between both
+applications and services. Applications can use D-Bus to communicate with
+system services, such as hardware-related daemons, or for communication between
+their own processes.</p>
+<p>GDBus is included in the GIO library, and provides a comprehensive
+implementation of the D-Bus protocol, as well as high-level API to implement
+both providers and consumers of D-Bus interfaces.</p>
+</section>
+<section id="multimedia-gstreamer">
+<h2>Multimedia: GStreamer<a class="headerlink" href="#multimedia-gstreamer" title="Permalink to this heading">¶</a></h2>
+<p>GTK 4 includes its own built-in video playback capability, which can be used
+for simple video playback. For other multimedia requirements, GStreamer is an
+integrated part of the GNOME platform, and can be used for simple audio
+and video playback, through to complex non-linear multimedia editing.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gstreamer.freedesktop.org/documentation/">GStreamer API reference</a></p></li>
+</ul>
+</section>
+<section id="settings-gsettings">
+<h2>Settings: GSettings<a class="headerlink" href="#settings-gsettings" title="Permalink to this heading">¶</a></h2>
+<p>GSettings is the GNOME library for reading and writing user settings. It
+allows storing a variety of settings types, including integers and arrays of
+strings.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.gtk.org/gio/class.Settings.html">GSettings API reference</a></p></li>
+</ul>
+</section>
+<section id="data-storage">
+<h2>Data Storage<a class="headerlink" href="#data-storage" title="Permalink to this heading">¶</a></h2>
+<p>The GNOME platform includes a variety of different data storage libraries,
+which are suitable for a range of requirements and needs.</p>
+<section id="gmarkup">
+<h3>GMarkup<a class="headerlink" href="#gmarkup" title="Permalink to this heading">¶</a></h3>
+<p>GMarkup is an XML parser which can be used to read/write simple XML. It is
+appropriate for data which is read and written by the same app and not shared
+between programs.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.gtk.org/glib/struct.MarkupParseContext.html">GMarkup API reference</a></p></li>
+</ul>
+</section>
+<section id="libxml2">
+<h3>libxml2<a class="headerlink" href="#libxml2" title="Permalink to this heading">¶</a></h3>
+<p>Libxml2 is a highly compliant XML parser/generator. It is suited to reading and
+writing XML that is shared between different projects, and has a defined
+specification and XML schema. Example uses of libxml2 include document rendering
+and editing.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.xmlsoft.org/html/index.html">Libxml2 reference manual</a></p></li>
+</ul>
+</section>
+<section id="keyfiles">
+<h3>Keyfiles<a class="headerlink" href="#keyfiles" title="Permalink to this heading">¶</a></h3>
+<p>Key-value files are <a class="reference external" href="https://en.wikipedia.org/wiki/INI_file">INI-like</a> files
+that can be used to store (grouped) key/value pairs. An example of key-value
+files are the <a class="reference external" href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html">desktop files</a>
+used to describe applications.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.gtk.org/glib/struct.KeyFile.html">GKeyFile API reference</a></p></li>
+</ul>
+</section>
+<section id="json-glib">
+<h3>JSON-GLib<a class="headerlink" href="#json-glib" title="Permalink to this heading">¶</a></h3>
+<p>JSON-GLib implements a full JSON parser and generator using GLib and GObject,
+and integrates JSON with GLib data types.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gnome.pages.gitlab.gnome.org/json-glib/">JSON-GLib API reference</a></p></li>
+</ul>
+</section>
+<section id="gda">
+<h3>GDA<a class="headerlink" href="#gda" title="Permalink to this heading">¶</a></h3>
+<p>libgda is a library which provides access to multiple SQL-based relational
+databases, including SQLite, MySQL, Postgres, MSAccess and more. Databases can
+either be local or remotely hosted. libgda includes a number of tools,
+including a SQL console, a data sources administration tool, and a database
+browser.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gitlab.gnome.org/GNOME/libgda">GDA project page</a></p></li>
+</ul>
+</section>
+<section id="gom">
+<h3>GOM<a class="headerlink" href="#gom" title="Permalink to this heading">¶</a></h3>
+<p>GOM is a <a class="reference external" href="https://en.m.wikipedia.org/wiki/Data_mapper_pattern">data mapper</a>
+for SQLite. It supports asynchronoous fetching and many-to-many tables, and
+helps with building search queries and database migrations.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gitlab.gnome.org/GNOME/gom">GOM project page</a></p></li>
+</ul>
+</section>
+<section id="tracker-sparql">
+<h3>Tracker SPARQL<a class="headerlink" href="#tracker-sparql" title="Permalink to this heading">¶</a></h3>
+<p>libtracker-sparql allows your app to store, query and publish structured data
+using <a class="reference external" href="https://en.wikipedia.org/wiki/Resource_Description_Framework">RDF</a>.
+It is based around <a class="reference external" href="http://sqlite.org/">SQLite</a> with a SPARQL translation
+layer that adds many additional features.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gnome.pages.gitlab.gnome.org/tracker/docs/developer/index.html">Tracker SPARQL documentation</a></p></li>
+</ul>
+</section>
+</section>
+<section id="networking">
+<h2>Networking<a class="headerlink" href="#networking" title="Permalink to this heading">¶</a></h2>
+<p>GNOME libraries provide access to a range of networking functionality and
+features.</p>
+<section id="gsocket">
+<h3>GSocket<a class="headerlink" href="#gsocket" title="Permalink to this heading">¶</a></h3>
+<p>GIO includes high-level network features, such as monitoring the network state
+of the system, creating network connections, implementing network services, and
+accepting client connections.</p>
+<p>GIO also provides a comprehensive set of low level networking APIs to abstract
+sockets, addresses, and proxies.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.gtk.org/gio/class.Socket.html">GSocket documentation</a></p></li>
+</ul>
+</section>
+<section id="tls-dns-support">
+<h3>TLS &amp; DNS support<a class="headerlink" href="#tls-dns-support" title="Permalink to this heading">¶</a></h3>
+<p>GIO provides support for <a class="reference external" href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>
+connections, both client and server side. It also supports resolvers for
+proxies, names and services.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.gtk.org/gio/tls-overview.html">TLS Overview</a></p></li>
+</ul>
+</section>
+<section id="avahi">
+<h3>Avahi<a class="headerlink" href="#avahi" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="http://avahi.org/">Avahi</a> implements <a class="reference external" href="https://en.wikipedia.org/wiki/Zero-configuration_networking">Zeroconf Networking</a>.
+It allows programs to discover services like printers on local networks without
+prior configuration. It also allows applications to set up services that are
+reachable through the local network without configuration; for example, a chat
+program that “finds” other chat users in a LAN without having to set up a
+central chat server first.</p>
+</section>
+<section id="soup">
+<h3>Soup<a class="headerlink" href="#soup" title="Permalink to this heading">¶</a></h3>
+<p>Soup is an HTTP library designed to be used in graphical applications. It uses
+asynchronous operations to avoid blocking the user interface while network
+requests are being made.</p>
+<p>Soup provides functionality for using HTTP cookies, SSL encrypted connections,
+and the XML-RPC protocol based on HTTP.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://libsoup.org/libsoup-3.0/index.html">Soup reference manual</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="services.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Services</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../components.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Platform Components</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, GNUstep contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Libraries</a><ul>
+<li><a class="reference internal" href="#user-interfaces">User Interfaces</a><ul>
+<li><a class="reference internal" href="#gtk">GTK</a></li>
+<li><a class="reference internal" href="#libadwaita">libadwaita</a></li>
+<li><a class="reference internal" href="#webkitgtk">WebKitGTK</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fonts-rendering">Fonts &amp; Rendering</a><ul>
+<li><a class="reference internal" href="#fontconfig">Fontconfig</a></li>
+<li><a class="reference internal" href="#freetype">FreeType</a></li>
+<li><a class="reference internal" href="#harfbuzz">HarfBuzz</a></li>
+<li><a class="reference internal" href="#pango">Pango</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image-loading">Image Loading</a><ul>
+<li><a class="reference internal" href="#gdk-pixbuf">gdk-pixbuf</a></li>
+<li><a class="reference internal" href="#librsvg">librsvg</a></li>
+<li><a class="reference internal" href="#glycin">glycin</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#d-drawing-cairo">2D Drawing: Cairo</a></li>
+<li><a class="reference internal" href="#file-system-access-operations-gfile">File System Access &amp; Operations: GFile</a></li>
+<li><a class="reference internal" href="#ipc-gdbus">IPC: GDBus</a></li>
+<li><a class="reference internal" href="#multimedia-gstreamer">Multimedia: GStreamer</a></li>
+<li><a class="reference internal" href="#settings-gsettings">Settings: GSettings</a></li>
+<li><a class="reference internal" href="#data-storage">Data Storage</a><ul>
+<li><a class="reference internal" href="#gmarkup">GMarkup</a></li>
+<li><a class="reference internal" href="#libxml2">libxml2</a></li>
+<li><a class="reference internal" href="#keyfiles">Keyfiles</a></li>
+<li><a class="reference internal" href="#json-glib">JSON-GLib</a></li>
+<li><a class="reference internal" href="#gda">GDA</a></li>
+<li><a class="reference internal" href="#gom">GOM</a></li>
+<li><a class="reference internal" href="#tracker-sparql">Tracker SPARQL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#networking">Networking</a><ul>
+<li><a class="reference internal" href="#gsocket">GSocket</a></li>
+<li><a class="reference internal" href="#tls-dns-support">TLS &amp; DNS support</a></li>
+<li><a class="reference internal" href="#avahi">Avahi</a></li>
+<li><a class="reference internal" href="#soup">Soup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=359c27e9"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    </body>
+</html>

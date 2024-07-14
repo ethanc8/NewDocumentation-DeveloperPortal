@@ -1,0 +1,706 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
+        <title>Writing a Search Provider - GNUstep Developer Portal</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GNUstep Developer Portal</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">GNUstep Developer Portal</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction.html">Platform Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Platform Introduction</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../introduction/components.html">Platform Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Platform Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/overview/libraries.html">Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/overview/services.html">Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/languages.html">Programming Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/builder.html">GNOME Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/flatpak.html">Flatpak</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guidelines.html">Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/programming.html">Programming Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Programming Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/coding-style.html">C Coding Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/memory-management.html">Managing Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/writing-good-code.html">The Importance of Writing Good Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/optimizing.html">Optimizing GNOME Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/namespacing.html">Namespacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/introspection.html">Introspection</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/accessibility.html">Accessibility</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Accessibility</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/accessibility/coding-guidelines.html">Coding Guidelines for Supporting Accessibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/accessibility/custom-widgets.html">Making Custom Components Accessible</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/localization.html">Localization</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Localization</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/localization/practices.html">Best Practices for Localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/maintainer.html">Maintainer Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Maintainer Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/maintainer/api-stability.html">API Stability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/maintainer/parallel-installability.html">Parallel Installability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/maintainer/integrating.html">Integrating with GNOME</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guidelines/devel-docs.html">Developer Documentation Style Guidelines</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://developer.gnome.org/hig/">Human Interface Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/inspector.html">GTK Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/valgrind.html">Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/massif.html">Massif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/sysprof.html">Sysprof</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/tutorials/search-provider.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="writing-a-search-provider">
+<h1>Writing a Search Provider<a class="headerlink" href="#writing-a-search-provider" title="Permalink to this heading">¶</a></h1>
+<p>Search is a central concept in the GNOME user experience. The search entry in
+the shell overview is the place to go for quick searches.</p>
+<p>A search provider is a mechanism by which an application can expose its search
+capabilities to GNOME Shell. When the user types anything in the shell’s search
+entry, the text is forwarded to all known search providers, and the results are
+relayed back for display.</p>
+<p>In the shell overview, search hits are grouped against their respective
+applications and a maximum of three is shown per application. The user can
+either select an individual result, in which case the application <em>SHOULD</em> open
+it; or she can select the application icon, in which case it <em>COULD</em> show an
+in-app view of all the results from this specific application without any
+limitation.</p>
+<p>The exact meaning of open depends on the application in question. Files and
+Documents offer a preview of the item’s content; Software shows an UI to install
+the application; and Terminal windows are simply brought into focus. If
+possible, the applications SHOULD offer a way to go ‘back’ to its search view,
+which should be pre-populated with the same search that was done in the shell.
+This lets the user continue to refine his search inside the application.</p>
+<p>Applications should be prepared to handle repeated queries as the user types
+more characters into the shell search entry.</p>
+<section id="basics">
+<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this heading">¶</a></h2>
+<p>For an application to become a search provider, it should implement the
+following D-Bus interface:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">node</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">interface</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;org.gnome.Shell.SearchProvider2&quot;</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">method</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;GetInitialResultSet&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;as&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;terms&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;as&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;results&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;out&quot;</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">method</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">method</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;GetSubsearchResultSet&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;as&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;previous_results&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;as&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;terms&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;as&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;results&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;out&quot;</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">method</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">method</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;GetResultMetas&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;as&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;identifiers&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;aa</span><span class="si">{sv}</span><span class="s2">&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;metas&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;out&quot;</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">method</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">method</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ActivateResult&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;s&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;identifier&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;as&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;terms&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;u&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;timestamp&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">method</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">method</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;LaunchSearch&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;as&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;terms&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;u&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;timestamp&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">method</span><span class="o">&gt;</span>
+
+  <span class="o">&lt;/</span><span class="n">interface</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">node</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also find a copy of this D-Bus interface definition at
+<code class="docutils literal notranslate"><span class="pre">$(datadir)/dbus-1/interfaces/org.gnome.ShellSearchProvider2.xml</span></code></p>
+</div>
+<section id="registering-a-new-search-provider">
+<h3>Registering a new search provider<a class="headerlink" href="#registering-a-new-search-provider" title="Permalink to this heading">¶</a></h3>
+<p>In order to register the search provider with GNOME Shell, you must provide a
+key/value file in <code class="docutils literal notranslate"><span class="pre">$(datadir)/gnome-shell/search-providers</span></code> for your provider.</p>
+<p>Let’s assume that we have an application called “Foo Bar” that is D-Bus
+activatable, where “Foo” is the project-wide namespace and “Bar” is the name of the
+application. Then we can create a file called <code class="docutils literal notranslate"><span class="pre">foo.bar.search-provider.ini</span></code> as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Shell</span> <span class="n">Search</span> <span class="n">Provider</span><span class="p">]</span>
+<span class="n">DesktopId</span><span class="o">=</span><span class="n">foo</span><span class="o">.</span><span class="n">Bar</span><span class="o">.</span><span class="n">desktop</span>
+<span class="n">BusName</span><span class="o">=</span><span class="n">foo</span><span class="o">.</span><span class="n">Bar</span>
+<span class="n">ObjectPath</span><span class="o">=/</span><span class="n">foo</span><span class="o">/</span><span class="n">Bar</span><span class="o">/</span><span class="n">SearchProvider</span>
+<span class="n">Version</span><span class="o">=</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>After you restart the Shell, the queries will now be forwarded to the search
+provider using the given D-Bus name.</p>
+</section>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading">¶</a></h2>
+<p>The GNOME control-center has a settings panel that allows the user to configure
+which search providers to use in the shell, and in what order to show their
+results. This is handled completely between the control-center and the shell,
+your application is not involved other than providing the name its desktop file
+in the <code class="docutils literal notranslate"><span class="pre">DesktopId</span></code> key. Both the shell and the control-center use this key to find
+the icon and name to use in the UI to represent your search provider.</p>
+</section>
+<section id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this heading">¶</a></h2>
+<p>Keep in mind is that activating the search provider by entering text in the
+shell search entry should not visibly launch the application. It is still
+possible to implement the search provider in the same binary as the application
+itself (which has the advantage that you can share the search implementation
+between the search provider and the in-application search); just make sure that
+activating the application starts it in ‘service’ mode. The <code class="docutils literal notranslate"><span class="pre">startup()</span></code>
+virtual function should not open any windows, that should only be done in
+<code class="docutils literal notranslate"><span class="pre">activate()</span></code> or <code class="docutils literal notranslate"><span class="pre">open()</span></code>.</p>
+<p>Another point to keep in mind is that searching in the shell should not affect
+the UI of your application if it is already running until the user explicitly
+chooses to open (one or all) search results with the application. Once the user
+does that, it is expected that you reuse the already open window and switch it
+to the search view.</p>
+<p>All methods of the SearchProvider interface should be implemented
+asynchronously, in particular, you should handle overlapping subsearch requests,
+as the user keeps typing in the shell search entry. A common way to deal with
+this is to cancel the previous search request when a new one comes in.</p>
+</section>
+<section id="the-searchprovider-interface">
+<h2>The SearchProvider interface<a class="headerlink" href="#the-searchprovider-interface" title="Permalink to this heading">¶</a></h2>
+<section id="getinitialresultset-as-as">
+<h3><code class="docutils literal notranslate"><span class="pre">GetInitialResultSet</span></code> :: <code class="docutils literal notranslate"><span class="pre">(as)</span></code> → <code class="docutils literal notranslate"><span class="pre">(as)</span></code><a class="headerlink" href="#getinitialresultset-as-as" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">GetInitialResultSet</span></code> is called when a new search is started. It gets an array
+of search terms as arguments, and should return an array of result IDs.
+gnome-shell will call <code class="docutils literal notranslate"><span class="pre">GetResultMetas</span></code> for (some) of these result IDs to get
+details about the result that can be be displayed in the result list.</p>
+</section>
+<section id="getsubsearchresultset-as-as-as">
+<h3><code class="docutils literal notranslate"><span class="pre">GetSubsearchResultSet</span></code> :: <code class="docutils literal notranslate"><span class="pre">(as,as)</span></code> → <code class="docutils literal notranslate"><span class="pre">(as)</span></code><a class="headerlink" href="#getsubsearchresultset-as-as-as" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">GetSubsearchResultSet</span></code> is called to refine the initial search results when
+the user types more characters in the search entry. It gets the previous search
+results and the current search terms as arguments, and should return an array of
+result IDs, just like <code class="docutils literal notranslate"><span class="pre">GetInitialResulSet</span></code>.</p>
+</section>
+<section id="getresultmetas-as-aa-sv">
+<h3><code class="docutils literal notranslate"><span class="pre">GetResultMetas</span></code> :: <code class="docutils literal notranslate"><span class="pre">(as)</span></code> → <code class="docutils literal notranslate"><span class="pre">(aa{sv})</span></code><a class="headerlink" href="#getresultmetas-as-aa-sv" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">GetResultMetas</span></code> is called to obtain detailed information for results. It gets
+an array of result IDs as arguments, and should return a matching array of
+dictionaries (ie one a{sv} for each passed-in result ID). The following pieces
+of information should be provided for each result:</p>
+<ul class="simple">
+<li><p>“id”: the result ID</p></li>
+<li><p>“name”: the display name for the result</p></li>
+<li><p>“icon”: a serialized GIcon (see <code class="docutils literal notranslate"><span class="pre">g_icon_serialize()</span></code>), or alternatively,</p></li>
+<li><p>“gicon”: a textual representation of a GIcon (see <code class="docutils literal notranslate"><span class="pre">g_icon_to_string()</span></code>), or alternatively,</p></li>
+<li><p>“icon-data”: a tuple of type <code class="docutils literal notranslate"><span class="pre">(iiibiiay)</span></code> describing a pixbuf with width,
+height, rowstride, has-alpha, bits-per-sample, n-channels, and image data</p></li>
+<li><p>“description”: an optional short description (1-2 lines)</p></li>
+<li><p>“clipboardText”: an optional text to send to the clipboard on activation</p></li>
+</ul>
+</section>
+<section id="activateresult-s-as-u">
+<h3><code class="docutils literal notranslate"><span class="pre">ActivateResult</span></code> :: <code class="docutils literal notranslate"><span class="pre">(s,as,u)</span></code> → <code class="docutils literal notranslate"><span class="pre">()</span></code><a class="headerlink" href="#activateresult-s-as-u" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ActivateResult</span></code> is called when the user clicks on an individual result to
+open it in the application. The arguments are the result ID, the current search
+terms and a timestamp.</p>
+</section>
+<section id="launchsearch-as-u">
+<h3><code class="docutils literal notranslate"><span class="pre">LaunchSearch</span></code> :: <code class="docutils literal notranslate"><span class="pre">(as,u)</span></code> → <code class="docutils literal notranslate"><span class="pre">()</span></code><a class="headerlink" href="#launchsearch-as-u" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">LaunchSearch</span></code> is called when the user clicks on the provider icon to display
+more search results in the application. The arguments are the current search
+terms and a timestamp.</p>
+</section>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
+<p>You can add a search provider to an application that is using GtkApplication by
+exporting the GDBusInterfaceSkeleton that implementing the search provider
+interface in the dbus_register() vfunc. Often the search provider is in the same
+binary as the application itself because it has the advantage of being able to
+share the search implementation, but this is not mandatory.</p>
+<p>Let’s assume that we have an application called Foo Bar, where Foo is the
+project-wide namespace and Bar is the name of the application.</p>
+<p>You should generate the <code class="docutils literal notranslate"><span class="pre">GDBusInterfaceSkeleton</span></code> using <code class="docutils literal notranslate"><span class="pre">gdbus-codegen</span></code>
+through the “gnome” Meson module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gnome</span> <span class="o">=</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;gnome&#39;</span><span class="p">)</span>
+
+<span class="n">sp_sources</span> <span class="o">=</span> <span class="n">gnome</span><span class="o">.</span><span class="n">gdbus_codegen</span><span class="p">(</span>
+  <span class="s1">&#39;shell-search-provider-generated&#39;</span><span class="p">,</span>
+  <span class="n">sources</span><span class="p">:</span> <span class="s1">&#39;org.gnome.Shell.SearchProvider2.xml&#39;</span><span class="p">,</span>
+  <span class="n">interface_prefix</span> <span class="p">:</span> <span class="s1">&#39;org.gnome.&#39;</span><span class="p">,</span>
+  <span class="n">namespace</span> <span class="p">:</span> <span class="s1">&#39;Bar&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Then you will need to override the <code class="docutils literal notranslate"><span class="pre">dbus_register()</span></code> and <code class="docutils literal notranslate"><span class="pre">dbus_unregister()</span></code>
+virtual functions of your <code class="docutils literal notranslate"><span class="pre">GtkApplication</span></code> in order to export and unexport the
+interface at the given path:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">G_DEFINE_TYPE</span><span class="w"> </span><span class="p">(</span><span class="n">BarApplication</span><span class="p">,</span><span class="w"> </span><span class="n">bar_application</span><span class="p">,</span><span class="w"> </span><span class="n">GTK_TYPE_APPLICATION</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">bar_application_class_init</span><span class="w"> </span><span class="p">(</span><span class="n">BarApplicationClass</span><span class="w"> </span><span class="o">*</span><span class="n">class</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">GApplicationClass</span><span class="w"> </span><span class="o">*</span><span class="n">application_class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G_APPLICATION_CLASS</span><span class="w"> </span><span class="p">(</span><span class="n">class</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">application_class</span><span class="o">-&gt;</span><span class="n">dbus_register</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar_application_dbus_register</span><span class="p">;</span>
+<span class="w">  </span><span class="n">application_class</span><span class="o">-&gt;</span><span class="n">dbus_unregister</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar_application_dbus_unregister</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">GtkApplication</span><span class="w"> </span><span class="o">*</span>
+<span class="nf">bar_application_new</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">g_object_new</span><span class="w"> </span><span class="p">(</span><span class="n">BAR_TYPE_APPLICATION</span><span class="p">,</span>
+<span class="w">                       </span><span class="s">&quot;application-id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo.bar&quot;</span><span class="p">,</span>
+<span class="w">                       </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">gboolean</span>
+<span class="nf">bar_application_dbus_register</span><span class="w"> </span><span class="p">(</span><span class="n">GApplication</span><span class="w"> </span><span class="o">*</span><span class="n">application</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">GDBusConnection</span><span class="w"> </span><span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+<span class="w">                               </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w"> </span><span class="o">*</span><span class="n">object_path</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">GError</span><span class="w"> </span><span class="o">**</span><span class="n">error</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">BarApplication</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BAR_APPLICATION</span><span class="w"> </span><span class="p">(</span><span class="n">application</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Chain up to the parent&#39;s implementation</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">G_APPLICATION_CLASS</span><span class="w"> </span><span class="p">(</span><span class="n">bar_application_parent_class</span><span class="p">)</span>
+<span class="w">         </span><span class="o">-&gt;</span><span class="n">dbus_register</span><span class="w"> </span><span class="p">(</span><span class="n">application</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">connection</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">object_path</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">error</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FALSE</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">g_autofree</span><span class="w"> </span><span class="n">search_provider_path</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">g_strconcat</span><span class="w"> </span><span class="p">(</span><span class="n">object_path</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/SearchProvider&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Export the SearchProvider interface to the given path</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">bar_search_provider_dbus_export</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">search_provider</span><span class="p">,</span>
+<span class="w">                                        </span><span class="n">connection</span><span class="p">,</span>
+<span class="w">                                        </span><span class="n">search_provider_path</span><span class="p">,</span>
+<span class="w">                                        </span><span class="n">error</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FALSE</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">bar_application_dbus_unregister</span><span class="w"> </span><span class="p">(</span><span class="n">GApplication</span><span class="w"> </span><span class="o">*</span><span class="n">application</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">GDBusConnection</span><span class="w"> </span><span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+<span class="w">                                 </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w"> </span><span class="o">*</span><span class="n">object_path</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">BarApplication</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BAR_APPLICATION</span><span class="w"> </span><span class="p">(</span><span class="n">application</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_autofree</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">search_provider_path</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">g_strconcat</span><span class="w"> </span><span class="p">(</span><span class="n">object_path</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/SearchProvider&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">bar_search_provider_dbus_unexport</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">search_provider</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">connection</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">search_provider_path</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">G_APPLICATION_CLASS</span><span class="w"> </span><span class="p">(</span><span class="n">bar_application_parent_class</span><span class="p">)</span>
+<span class="w">    </span><span class="o">-&gt;</span><span class="n">dbus_unregister</span><span class="w"> </span><span class="p">(</span><span class="n">application</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">object_path</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You will need to create a search provider object as the implementation of the
+interface:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">G_DECLARE_FINAL_TYPE</span><span class="w"> </span><span class="p">(</span><span class="n">BarSearchProvider</span><span class="p">,</span><span class="w"> </span><span class="n">bar_search_provider</span><span class="p">,</span><span class="w"> </span><span class="n">BAR</span><span class="p">,</span><span class="w"> </span><span class="n">SEARCH_PROVIDER</span><span class="p">,</span><span class="w"> </span><span class="n">GObject</span><span class="p">)</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">_BarSearchProvider</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">GObject</span><span class="w"> </span><span class="n">parent_instance</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ShellSearchProvider2</span><span class="w"> </span><span class="o">*</span><span class="n">skeleton</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">G_DEFINE_TYPE</span><span class="w"> </span><span class="p">(</span><span class="n">BarSearchProvider</span><span class="p">,</span><span class="w"> </span><span class="n">bar_search_provider</span><span class="p">,</span><span class="w"> </span><span class="n">G_TYPE_OBJECT</span><span class="p">)</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="n">bar_search_provider_init</span><span class="w"> </span><span class="p">(</span><span class="n">BarSearchProvider</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">self</span><span class="o">-&gt;</span><span class="n">skeleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shell_search_provider2_skeleton_new</span><span class="w"> </span><span class="p">();</span>
+
+<span class="w">  </span><span class="n">g_signal_connect_swapped</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">skeleton</span><span class="p">,</span>
+<span class="w">                            </span><span class="s">&quot;handle-activate-result&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">G_CALLBACK</span><span class="w"> </span><span class="p">(</span><span class="n">bar_search_provider_activate_result</span><span class="p">),</span>
+<span class="w">                            </span><span class="n">self</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_signal_connect_swapped</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">skeleton</span><span class="p">,</span>
+<span class="w">                            </span><span class="s">&quot;handle-get-initial-result-set&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">G_CALLBACK</span><span class="w"> </span><span class="p">(</span><span class="n">bar_search_provider_get_initial_result_set</span><span class="p">),</span>
+<span class="w">                            </span><span class="n">self</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_signal_connect_swapped</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">skeleton</span><span class="p">,</span>
+<span class="w">                            </span><span class="s">&quot;handle-get-subsearch-result-set&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">G_CALLBACK</span><span class="w"> </span><span class="p">(</span><span class="n">bar_search_provider_get_subsearch_result_set</span><span class="p">),</span>
+<span class="w">                            </span><span class="n">self</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_signal_connect_swapped</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">skeleton</span><span class="p">,</span>
+<span class="w">                            </span><span class="s">&quot;handle-get-result-metas&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">G_CALLBACK</span><span class="w"> </span><span class="p">(</span><span class="n">bar_search_provider_get_result_metas</span><span class="p">),</span>
+<span class="w">                            </span><span class="n">self</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_signal_connect_swapped</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">skeleton</span><span class="p">,</span>
+<span class="w">                            </span><span class="s">&quot;handle-launch-search&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">G_CALLBACK</span><span class="w"> </span><span class="p">(</span><span class="n">bar_search_provider_launch_search</span><span class="p">),</span>
+<span class="w">                            </span><span class="n">self</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If your D-Bus method handlers are asynchronous, then you should hold a
+reference to BarApplication using <code class="docutils literal notranslate"><span class="pre">g_application_hold()</span></code> and then release
+the reference using <code class="docutils literal notranslate"><span class="pre">g_application_release()</span></code> when you are done. Use the
+corresponding <code class="docutils literal notranslate"><span class="pre">shell_search_provider2_complete*</span></code> methods to indicate
+completion and send back results, if any.</p>
+</div>
+<p>Here’s a pair of convenience wrapper methods for exporting and unexporting the
+skeleton:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">gboolean</span>
+<span class="nf">bar_search_provider_dbus_export</span><span class="w"> </span><span class="p">(</span><span class="n">BarSearchProvider</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">GDBusConnection</span><span class="w"> </span><span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+<span class="w">                                 </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w"> </span><span class="o">*</span><span class="n">object_path</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">GError</span><span class="w"> </span><span class="o">**</span><span class="n">error</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">g_dbus_interface_skeleton_export</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">G_DBUS_INTERFACE_SKELETON</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">skeleton</span><span class="p">),</span>
+<span class="w">    </span><span class="n">connection</span><span class="p">,</span>
+<span class="w">    </span><span class="n">object_path</span><span class="p">,</span>
+<span class="w">    </span><span class="n">error</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span>
+<span class="nf">bar_search_provider_dbus_unexport</span><span class="w"> </span><span class="p">(</span><span class="n">BarSearchProvider</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span>
+<span class="w">                                   </span><span class="n">GDBusConnection</span><span class="w"> </span><span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+<span class="w">                                   </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w"> </span><span class="o">*</span><span class="n">object_path</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">g_dbus_interface_skeleton_has_connection</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="n">G_DBUS_INTERFACE_SKELETON</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">skeleton</span><span class="p">),</span>
+<span class="w">        </span><span class="n">connection</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">g_dbus_interface_skeleton_unexport_from_connection</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="n">G_DBUS_INTERFACE_SKELETON</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">skeleton</span><span class="p">),</span>
+<span class="w">        </span><span class="n">connection</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, GNUstep contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Writing a Search Provider</a><ul>
+<li><a class="reference internal" href="#basics">Basics</a><ul>
+<li><a class="reference internal" href="#registering-a-new-search-provider">Registering a new search provider</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#details">Details</a></li>
+<li><a class="reference internal" href="#the-searchprovider-interface">The SearchProvider interface</a><ul>
+<li><a class="reference internal" href="#getinitialresultset-as-as"><code class="docutils literal notranslate"><span class="pre">GetInitialResultSet</span></code> :: <code class="docutils literal notranslate"><span class="pre">(as)</span></code> → <code class="docutils literal notranslate"><span class="pre">(as)</span></code></a></li>
+<li><a class="reference internal" href="#getsubsearchresultset-as-as-as"><code class="docutils literal notranslate"><span class="pre">GetSubsearchResultSet</span></code> :: <code class="docutils literal notranslate"><span class="pre">(as,as)</span></code> → <code class="docutils literal notranslate"><span class="pre">(as)</span></code></a></li>
+<li><a class="reference internal" href="#getresultmetas-as-aa-sv"><code class="docutils literal notranslate"><span class="pre">GetResultMetas</span></code> :: <code class="docutils literal notranslate"><span class="pre">(as)</span></code> → <code class="docutils literal notranslate"><span class="pre">(aa{sv})</span></code></a></li>
+<li><a class="reference internal" href="#activateresult-s-as-u"><code class="docutils literal notranslate"><span class="pre">ActivateResult</span></code> :: <code class="docutils literal notranslate"><span class="pre">(s,as,u)</span></code> → <code class="docutils literal notranslate"><span class="pre">()</span></code></a></li>
+<li><a class="reference internal" href="#launchsearch-as-u"><code class="docutils literal notranslate"><span class="pre">LaunchSearch</span></code> :: <code class="docutils literal notranslate"><span class="pre">(as,u)</span></code> → <code class="docutils literal notranslate"><span class="pre">()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=359c27e9"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    </body>
+</html>

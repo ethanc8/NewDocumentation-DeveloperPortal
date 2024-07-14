@@ -1,0 +1,547 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
+        <title>Asynchronous Programming - GNUstep Developer Portal</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GNUstep Developer Portal</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">GNUstep Developer Portal</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction.html">Platform Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Platform Introduction</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../introduction/components.html">Platform Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Platform Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/overview/libraries.html">Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/overview/services.html">Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/languages.html">Programming Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/builder.html">GNOME Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/flatpak.html">Flatpak</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guidelines.html">Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/programming.html">Programming Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Programming Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/coding-style.html">C Coding Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/memory-management.html">Managing Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/writing-good-code.html">The Importance of Writing Good Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/optimizing.html">Optimizing GNOME Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/namespacing.html">Namespacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/introspection.html">Introspection</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/accessibility.html">Accessibility</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Accessibility</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/accessibility/coding-guidelines.html">Coding Guidelines for Supporting Accessibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/accessibility/custom-widgets.html">Making Custom Components Accessible</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/localization.html">Localization</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Localization</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/localization/practices.html">Best Practices for Localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/maintainer.html">Maintainer Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Maintainer Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/maintainer/api-stability.html">API Stability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/maintainer/parallel-installability.html">Parallel Installability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/maintainer/integrating.html">Integrating with GNOME</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guidelines/devel-docs.html">Developer Documentation Style Guidelines</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://developer.gnome.org/hig/">Human Interface Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/inspector.html">GTK Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/valgrind.html">Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/massif.html">Massif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/sysprof.html">Sysprof</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/tutorials/asynchronous-programming.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="asynchronous-programming">
+<h1>Asynchronous Programming<a class="headerlink" href="#asynchronous-programming" title="Permalink to this heading">¶</a></h1>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Use asynchronous calls in preference to synchronous calls or explicit use of
+threads</p></li>
+<li><p>Learn and follow the GLib pattern for declaring asynchronous APIs</p></li>
+<li><p>Place callbacks from asynchronous functions in order down the file, so control
+flow is easy to follow</p></li>
+<li><p>Use the presence of a <code class="docutils literal notranslate"><span class="pre">GTask</span></code> or <code class="docutils literal notranslate"><span class="pre">GCancellable</span></code> to indicate whether an
+operation is ongoing</p></li>
+<li><p>If running operations in parallel, track how many operations are yet to start,
+and how many are yet to finish — the overall operation is complete once both
+counts are zero</p></li>
+<li><p>Separate state for operations into ‘task data’ structures for <code class="docutils literal notranslate"><span class="pre">GTask</span></code>,
+allowing operations to be reused more easily without needing changes to
+global state handling</p></li>
+<li><p>Consider how asynchronous methods on an object instance interact with
+finalization of that instance</p></li>
+</ul>
+</section>
+<section id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading">¶</a></h2>
+<p>GLib supports <em>asynchronous programming</em>, where long-running operations can be
+started, run ‘in the background’, and a callback invoked when they are finished
+and their results are available. This is in direct contrast to synchronous
+long-running operations, which are a single function call which blocks program
+control flow until complete.</p>
+<p>As discussed in the <a class="reference internal" href="main-contexts.html"><span class="doc">Main Contexts</span></a> and in the
+<a class="reference internal" href="threading.html"><span class="doc">Threading</span></a> tutorials, asynchronous operations
+should be favoured over synchronous ones and over explicit use of threading.
+They do not block the main context like sychronous operations do; and are
+easier to use correctly than threads. They often also have a lower performance
+penalty than spawning a thread and sending work to it.</p>
+</section>
+<section id="api-patterns">
+<h2>API patterns<a class="headerlink" href="#api-patterns" title="Permalink to this heading">¶</a></h2>
+<p>Asynchronous calls follow a standard pattern in GLib code. For an operation
+named <code class="docutils literal notranslate"><span class="pre">load_data</span></code> on the <code class="docutils literal notranslate"><span class="pre">File</span></code> class in the <code class="docutils literal notranslate"><span class="pre">Foo</span></code> namespace, there will
+be:</p>
+</section>
+<section id="operation-lifetimes">
+<h2>Operation Lifetimes<a class="headerlink" href="#operation-lifetimes" title="Permalink to this heading">¶</a></h2>
+<p>When writing asynchronous operations, it is common to write them as methods of a
+class. In this case, it is important to define how ongoing operations on a class
+instance interact with finalization of that instance. There are two approaches:</p>
+<p><strong>Strong</strong></p>
+<p>: The ongoing operation keeps a reference to the class instance, forcing it to
+remain alive for the duration of the operation. The class should provide some
+kind of ‘close’ or ‘cancel’ method which can be used by other classes to force
+cancellation of the operation and allow that instance to be finalized.</p>
+<p><strong>Weak</strong></p>
+<p>: The ongoing operation does <em>not</em> keep a reference to the class instance, and
+the class cancels the operation (using <code class="docutils literal notranslate"><span class="pre">g_cancellable_cancel()</span></code>) in its
+dispose function.</p>
+<p>Which approach is used depends on the class’ design. A class which wraps a
+particular operation (perhaps a <code class="docutils literal notranslate"><span class="pre">MyFileTransfer</span></code> class, for example) might
+want to use the <em>weak</em> approach. A class which manages multiple network
+connections and asynchronous operations on them may use the <em>strong</em> approach
+instead. Due to incoming network connections, for example, it might not be in
+complete control of the scheduling of its asynchronous calls, so the weak
+approach would not be appropriate—any code dropping a reference to the object
+could not be sure it was not accidentally killing a new network connection.</p>
+</section>
+<section id="using-asynchronous-functions">
+<h2>Using asynchronous functions<a class="headerlink" href="#using-asynchronous-functions" title="Permalink to this heading">¶</a></h2>
+<p>It is often the case that multiple asynchronous calls need to be used to
+complete an operation. For example, opening a file for reading, then performing
+a couple of reads, and then closing the file. Or opening several network sockets
+in parallel and waiting until they are all open before continuing with other
+work. Some examples of these situations are given below.</p>
+<section id="single-operation">
+<h3>Single operation<a class="headerlink" href="#single-operation" title="Permalink to this heading">¶</a></h3>
+<p>A single asynchronous call requires two functions: one to start the operation,
+and one to complete it. In C, the demanding part of performing an asynchronous
+call is correctly storing state between these two functions, and handling
+changes to that state in the time between those two functions being called. For
+example, cancellation of an ongoing asynchronous call is a state change, and if
+not implemented carefully, any UI updates (for example) made when cancelling an
+operation will be undone by updates in the operation’s callback.</p>
+<p>The example below demonstrates copying a file from one location in the file
+system to another. The key principles demonstrated here are:</p>
+<ul class="simple">
+<li><p>Placing the <code class="docutils literal notranslate"><span class="pre">copy_button_clicked_cb()</span></code> (start) and <code class="docutils literal notranslate"><span class="pre">copy_finish_cb()</span></code>
+(finish) functions in order by using a forward declaration for
+<code class="docutils literal notranslate"><span class="pre">copy_finish_cb()</span></code>. This means the control flow continues linearly down the
+file, rather than getting to the bottom of <code class="docutils literal notranslate"><span class="pre">copy_button_clicked_cb()</span></code> and
+resuming in <code class="docutils literal notranslate"><span class="pre">copy_finish_cb()</span></code> somewhere else in the file.</p></li>
+<li><p>Using a <code class="docutils literal notranslate"><span class="pre">GCancellable</span></code> to allow cancelling the operation after it has
+started. The code in <code class="docutils literal notranslate"><span class="pre">cancel_button_clicked_cb()</span></code> is very simple: as the
+<code class="docutils literal notranslate"><span class="pre">copy_finish_cb()</span></code> callback is guaranteed to be invoked when the operation
+completes (even when completing early due to cancellation), all the UI and
+state updates for cancellation can be handled there, rather than in
+<code class="docutils literal notranslate"><span class="pre">cancel_button_clicked_cb()</span></code>.</p></li>
+<li><p>An operation is ongoing exactly while <code class="docutils literal notranslate"><span class="pre">MyObjectPrivate.copy_cancellable</span></code> is
+not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, making it easy to track running operations. Note that this
+means only one file copy operation can be started via
+<code class="docutils literal notranslate"><span class="pre">copy_button_clicked_cb()</span></code> at a time. One <code class="docutils literal notranslate"><span class="pre">GCancellable</span></code> cannot easily be
+used for multiple operations like this.</p></li>
+</ul>
+<p>For comparison, here is the same code implemented using the synchronous version
+of <code class="docutils literal notranslate"><span class="pre">g_file_copy()</span></code>. Note how the order of statements is almost identical.  The
+UI is blocked from updating and receiving user input, which also means that
+cancellation cannot be supported. This is the main reason why this code should
+not be used in practice:</p>
+</section>
+<section id="operations-in-series">
+<h3>Operations in series<a class="headerlink" href="#operations-in-series" title="Permalink to this heading">¶</a></h3>
+<p>A common situation is to run multiple asynchronous operations in series, when
+each operation depends on the previous one completing.</p>
+<p>In this example, the application reads a socket address from a file, opens a
+connection to that address, reads a message, and then finishes.</p>
+<p>Key points in this example are:</p>
+<ul class="simple">
+<li><p>Each callback is numbered consistently, and they are all placed in order in
+the file so the code follows sequentially.</p></li>
+<li><p>As in the single-call example, a single <code class="docutils literal notranslate"><span class="pre">GCancellable</span></code> indicates that the
+series of operations is ongoing. Cancelling it aborts the entire sequence.</p></li>
+<li><p>As in the single-call example, the pending operation is cancelled if the
+owning <code class="docutils literal notranslate"><span class="pre">MyObject</span></code> instance is disposed, to prevent callbacks being called
+later with an invalid MyObject pointer.</p></li>
+</ul>
+</section>
+<section id="operations-in-parallel">
+<h3>Operations in parallel<a class="headerlink" href="#operations-in-parallel" title="Permalink to this heading">¶</a></h3>
+<p>Another common situation is to run multiple asynchronous operations in parallel,
+considering the overall operation complete when all its constituents are
+complete.</p>
+<p>In this example, the application deletes multiple files in parallel.</p>
+<p>Key points in this example are:</p>
+<ul class="simple">
+<li><p>The number of pending asynchronous operations (ones which have started but not
+yet finished) is tracked as <code class="docutils literal notranslate"><span class="pre">n_deletions_pending</span></code>. The <code class="docutils literal notranslate"><span class="pre">delete_files_cb()</span></code>
+callback only considers the entire operation complete once this reaches zero.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_deletions_to_start</span></code> tracks deletion operations being started, in case
+<code class="docutils literal notranslate"><span class="pre">g_file_delete_async()</span></code> manages to use a fast path and complete
+synchronously (without blocking).</p></li>
+<li><p>As in the single-call example, all pending deletions are cancelled if the
+owning <code class="docutils literal notranslate"><span class="pre">MyObject</span></code> instance is disposed, to prevent callbacks being called
+later with an invalid <code class="docutils literal notranslate"><span class="pre">MyObject</span></code> pointer.</p></li>
+</ul>
+</section>
+<section id="wrapping-with-gtask">
+<h3>Wrapping with GTask<a class="headerlink" href="#wrapping-with-gtask" title="Permalink to this heading">¶</a></h3>
+<p>Often when an asynchronous operation (or set of operations) becomes more
+complex, it needs associated state. This is typically stored in a custom
+structure — but defining a new structure to store the standard callback, user
+data and cancellable tuple is laborious. <code class="docutils literal notranslate"><span class="pre">GTask</span></code> eases this by providing a
+standardized way to wrap all three, plus extra custom ‘task data’.</p>
+<p>The use of a <code class="docutils literal notranslate"><span class="pre">GTask</span></code> can replace the use of a <code class="docutils literal notranslate"><span class="pre">GCancellable</span></code> for
+indicating whether an operation is ongoing.</p>
+<p>This example is functionally the same as the operations in series example,
+but refactored to use a <code class="docutils literal notranslate"><span class="pre">GTask</span></code> to wrap the sequence of operations.</p>
+<p>Key points in this example are:</p>
+<ul class="simple">
+<li><p>State which was in <code class="docutils literal notranslate"><span class="pre">MyObjectPrivate</span></code> in the series example is now in the
+<code class="docutils literal notranslate"><span class="pre">ConnectToServerData</span></code> closure, which is set as the ‘task data’ of the
+<code class="docutils literal notranslate"><span class="pre">GTask</span></code> representing the overall operation. This means it’s automatically
+freed after the operation returns.</p></li>
+<li><p>Furthermore, this means that manipulations of <code class="docutils literal notranslate"><span class="pre">MyObjectPrivate</span></code> state are
+limited to the start and end of the sequence of operations, so reusing the
+task in different situations becomes possible—for example, it is now a lot
+easier to support running multiple such tasks in parallel.</p></li>
+<li><p>As the <code class="docutils literal notranslate"><span class="pre">GTask</span></code> holds a reference to <code class="docutils literal notranslate"><span class="pre">MyObject</span></code>, it is impossible for the
+object to be disposed while the sequence of operations is ongoing, so the
+<code class="docutils literal notranslate"><span class="pre">my_object_dispose()</span></code> code has been removed. Instead, a
+<code class="docutils literal notranslate"><span class="pre">my_object_close()</span></code> method exists to allow any pending operations can be
+cancelled so <code class="docutils literal notranslate"><span class="pre">MyObject</span></code> can be disposed when desired.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, GNUstep contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Asynchronous Programming</a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#concepts">Concepts</a></li>
+<li><a class="reference internal" href="#api-patterns">API patterns</a></li>
+<li><a class="reference internal" href="#operation-lifetimes">Operation Lifetimes</a></li>
+<li><a class="reference internal" href="#using-asynchronous-functions">Using asynchronous functions</a><ul>
+<li><a class="reference internal" href="#single-operation">Single operation</a></li>
+<li><a class="reference internal" href="#operations-in-series">Operations in series</a></li>
+<li><a class="reference internal" href="#operations-in-parallel">Operations in parallel</a></li>
+<li><a class="reference internal" href="#wrapping-with-gtask">Wrapping with GTask</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=359c27e9"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    </body>
+</html>

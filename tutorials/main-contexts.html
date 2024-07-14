@@ -1,0 +1,1031 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
+        <title>Main Contexts - GNUstep Developer Portal</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GNUstep Developer Portal</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">GNUstep Developer Portal</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction.html">Platform Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Platform Introduction</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../introduction/components.html">Platform Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Platform Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/overview/libraries.html">Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/overview/services.html">Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/languages.html">Programming Languages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/builder.html">GNOME Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/flatpak.html">Flatpak</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guidelines.html">Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/programming.html">Programming Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Programming Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/coding-style.html">C Coding Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/memory-management.html">Managing Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/writing-good-code.html">The Importance of Writing Good Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/optimizing.html">Optimizing GNOME Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/namespacing.html">Namespacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/programming/introspection.html">Introspection</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/accessibility.html">Accessibility</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Accessibility</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/accessibility/coding-guidelines.html">Coding Guidelines for Supporting Accessibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/accessibility/custom-widgets.html">Making Custom Components Accessible</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/localization.html">Localization</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Localization</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/localization/practices.html">Best Practices for Localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../guidelines/maintainer.html">Maintainer Guidelines</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Maintainer Guidelines</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/maintainer/api-stability.html">API Stability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/maintainer/parallel-installability.html">Parallel Installability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guidelines/maintainer/integrating.html">Integrating with GNOME</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guidelines/devel-docs.html">Developer Documentation Style Guidelines</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://developer.gnome.org/hig/">Human Interface Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/inspector.html">GTK Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/valgrind.html">Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/massif.html">Massif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/sysprof.html">Sysprof</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/tutorials/main-contexts.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="main-contexts">
+<h1>Main Contexts<a class="headerlink" href="#main-contexts" title="Permalink to this heading">¶</a></h1>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">g_main_context_invoke_full()</span></code> to invoke functions in other threads,
+assuming every thread has a thread default main context which runs throughout
+the lifetime of that thread</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">GTask</span></code> to run a function in the background without caring about the
+specific thread used</p></li>
+<li><p>Liberally use assertions to check which context executes each function, and
+add these assertions when first writing the code</p></li>
+<li><p>Explicitly document contexts a function is expected to be called in, a
+callback will be invoked in, or a signal will be emitted in</p></li>
+<li><p>Beware of <code class="docutils literal notranslate"><span class="pre">g_idle_add()</span></code> and similar functions which implicitly use the
+global-default main context</p></li>
+</ul>
+</section>
+<section id="what-is-gmaincontext">
+<h2>What is GMainContext?<a class="headerlink" href="#what-is-gmaincontext" title="Permalink to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> is a generalized implementation of an event loop, useful for
+implementing polled file I/O or event-based widget systems (such as GTK). It is
+at the core of almost every GLib application. To understand <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code>
+requires understanding <code class="docutils literal notranslate"><span class="pre">poll()</span></code> and polled I/O.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> has a set of sources which are ‘attached’ to it, each of
+which can be thought of as an expected event with an associated callback
+function which will be invoked when that event is received; or equivalently as a
+set of file descriptors (FDs) to check. An event could be a timeout or data
+being received on a socket, for example. One iteration of the event loop will:</p>
+<ul class="simple">
+<li><p>Prepare sources, determining if any of them are ready to dispatch immediately.</p></li>
+<li><p>Poll the sources, blocking the current thread until an event is received for
+one of the sources.</p></li>
+<li><p>Check which of the sources received an event (several could have).</p></li>
+<li><p>Dispatch callbacks from those sources.</p></li>
+</ul>
+<p>This is explained very well in the <a class="reference external" href="https://docs.gtk.org/glib/main-loop.html">GLib documentation</a>.</p>
+<p>At its core, <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> is just a <code class="docutils literal notranslate"><span class="pre">poll()</span></code> loop, with the preparation,
+check and dispatch stages of the loop corresponding to the normal preamble and
+postamble in a typical <code class="docutils literal notranslate"><span class="pre">poll()</span></code> loop implementation. Typically, some
+complexity is needed in non-trivial <code class="docutils literal notranslate"><span class="pre">poll()</span></code>-using applications to track the
+lists of FDs which are being polled. Additionally, <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> adds a lot
+of useful functionality which vanilla <code class="docutils literal notranslate"><span class="pre">poll()</span></code> doesn’t support. Most
+importantly, it adds thread safety.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> is completely thread safe, meaning that a <code class="docutils literal notranslate"><span class="pre">GSource</span></code> can be
+created in one thread and attached to a <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> running in another
+thread. A typical use for this might be to allow worker threads to control which
+sockets are being listened to by a <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> in a central I/O thread.
+Each <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> is ‘acquired’ by a thread for each iteration it’s put
+through. Other threads cannot iterate a <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> without acquiring it,
+which guarantees that a <code class="docutils literal notranslate"><span class="pre">GSource</span></code> and its FDs will only be polled by one
+thread at once (since each <code class="docutils literal notranslate"><span class="pre">GSource</span></code> is attached to at most one
+<code class="docutils literal notranslate"><span class="pre">GMainContext</span></code>). A <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> can be swapped between threads across
+iterations, but this is expensive.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> is used instead of <code class="docutils literal notranslate"><span class="pre">poll()</span></code> mostly for convenience, as it
+transparently handles dynamically managing the array of FDs to pass to
+<code class="docutils literal notranslate"><span class="pre">poll()</span></code>, especially when operating over multiple threads. This is done by
+encapsulating file descriptors inside a <code class="docutils literal notranslate"><span class="pre">GSource</span></code>, which decide whether those
+FDs should be passed to the <code class="docutils literal notranslate"><span class="pre">poll()</span></code> call on each ‘prepare’ stage of the main
+context iteration.</p>
+</section>
+<section id="what-is-gmainloop">
+<h2>What is GMainLoop?<a class="headerlink" href="#what-is-gmainloop" title="Permalink to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">GMainLoop</span></code> is essentially the following few lines of code, once reference
+counting and locking have been removed:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">loop</span><span class="o">-&gt;</span><span class="n">is_running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">loop</span><span class="o">-&gt;</span><span class="n">is_running</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">quit_condition</span><span class="p">)</span>
+<span class="w">      </span><span class="n">loop</span><span class="o">-&gt;</span><span class="n">is_running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FALSE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">g_main_context_iteration</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">TRUE</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">quit_condition</span></code> to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> will cause the loop to terminate once the
+current main context iteration ends.</p>
+<p>Hence, <code class="docutils literal notranslate"><span class="pre">GMainLoop</span></code> is a convenient, thread-safe way of running a
+<code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> to process events until a desired exit condition is met, at
+which point <code class="docutils literal notranslate"><span class="pre">g_main_loop_quit()</span></code> should be called. Typically, in a UI program,
+this will be the user clicking ‘exit’. In a socket handling program, this might
+be the final socket closing.</p>
+<p>It is important not to confuse main contexts with main loops. Main contexts do
+the bulk of the work: preparing source lists, waiting for events, and
+dispatching callbacks. A main loop simply iterates a context.</p>
+</section>
+<section id="default-contexts">
+<h2>Default Contexts<a class="headerlink" href="#default-contexts" title="Permalink to this heading">¶</a></h2>
+<p>One of the important features of <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> is its support for ‘default’
+contexts. There are two levels of default context: the thread-default, and the
+global-default. The global-default (accessed using <code class="docutils literal notranslate"><span class="pre">g_main_context_default()</span></code>) is
+run by GTK when <code class="docutils literal notranslate"><span class="pre">g_application_run()</span></code> is called. It’s also used for timeouts
+(<code class="docutils literal notranslate"><span class="pre">g_timeout_add()</span></code>) and idle callbacks (<code class="docutils literal notranslate"><span class="pre">g_idle_add()</span></code>) — these won’t be dispatched
+unless the default context is running!</p>
+<p>Thread-default contexts are generally used for I/O operations which need to run
+and dispatch callbacks in a thread. By calling
+<code class="docutils literal notranslate"><span class="pre">g_main_context_push_thread_default()</span></code> before starting an I/O operation, the
+thread-default context is set and the I/O operation can add its sources to that
+context. The context can then be run in a new main loop in an I/O thread,
+causing the callbacks to be dispatched on that thread’s stack rather than on the
+stack of the thread running the global-default main context. This allows I/O
+operations to be run entirely in a separate thread without explicitly passing a
+specific GMainContext pointer around everywhere.</p>
+<p>Conversely, by starting a long-running operation with a specific thread-default
+context set, the calling code can guarantee that the operation’s callbacks will
+be emitted in that context, even if the operation itself runs in a worker
+thread. This is the principle behind <code class="docutils literal notranslate"><span class="pre">GTask</span></code>: when a new <code class="docutils literal notranslate"><span class="pre">GTask</span></code> is created, it
+stores a reference to the current thread-default context, and dispatches its
+completion callback in that context, even if the task itself is run using
+<code class="docutils literal notranslate"><span class="pre">g_task_run_in_thread()</span></code>.</p>
+<p>For example, the code below will run a <code class="docutils literal notranslate"><span class="pre">GTask</span></code> which performs two writes in
+parallel from a thread. The callbacks for the writes will be dispatched in the
+worker thread, whereas the callback from the task as a whole will be dispatched
+in the interesting_context.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">GMainLoop</span><span class="w"> </span><span class="o">*</span><span class="n">main_loop</span><span class="p">;</span>
+<span class="w">  </span><span class="n">guint</span><span class="w"> </span><span class="n">n_remaining</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">WriteData</span><span class="p">;</span>
+
+<span class="cm">/* This is always called in the same thread as thread_cb() because</span>
+<span class="cm"> * it’s always dispatched in the @worker_context. */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">write_cb</span><span class="w"> </span><span class="p">(</span><span class="n">GObject</span><span class="w">      </span><span class="o">*</span><span class="n">source_object</span><span class="p">,</span>
+<span class="w">          </span><span class="n">GAsyncResult</span><span class="w"> </span><span class="o">*</span><span class="n">result</span><span class="p">,</span>
+<span class="w">          </span><span class="n">gpointer</span><span class="w">      </span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">WriteData</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_data</span><span class="p">;</span>
+<span class="w">  </span><span class="n">GOutputStream</span><span class="w"> </span><span class="o">*</span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G_OUTPUT_STREAM</span><span class="w"> </span><span class="p">(</span><span class="n">source_object</span><span class="p">);</span>
+<span class="w">  </span><span class="n">GError</span><span class="w"> </span><span class="o">*</span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">  </span><span class="n">gssize</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Finish the write. */</span>
+<span class="w">  </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_output_stream_write_finish</span><span class="w"> </span><span class="p">(</span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">g_error</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Error: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">);</span>
+<span class="w">      </span><span class="n">g_error_free</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">  </span><span class="cm">/* Check whether all parallel operations have finished. */</span>
+<span class="w">  </span><span class="n">write_data</span><span class="o">-&gt;</span><span class="n">n_remaining</span><span class="o">--</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">write_data</span><span class="o">-&gt;</span><span class="n">n_remaining</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">g_main_loop_quit</span><span class="w"> </span><span class="p">(</span><span class="n">write_data</span><span class="o">-&gt;</span><span class="n">main_loop</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/* This is called in a new thread. */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">thread_cb</span><span class="w"> </span><span class="p">(</span><span class="n">GTask</span><span class="w">        </span><span class="o">*</span><span class="n">task</span><span class="p">,</span>
+<span class="w">           </span><span class="n">gpointer</span><span class="w">      </span><span class="n">source_object</span><span class="p">,</span>
+<span class="w">           </span><span class="n">gpointer</span><span class="w">      </span><span class="n">task_data</span><span class="p">,</span>
+<span class="w">           </span><span class="n">GCancellable</span><span class="w"> </span><span class="o">*</span><span class="n">cancellable</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="cm">/* These streams come from somewhere else in the program: */</span>
+<span class="w">  </span><span class="n">GOutputStream</span><span class="w"> </span><span class="o">*</span><span class="n">output_stream1</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">output_stream</span><span class="p">;</span>
+<span class="w">  </span><span class="n">GMainContext</span><span class="w"> </span><span class="o">*</span><span class="n">worker_context</span><span class="p">;</span>
+<span class="w">  </span><span class="n">GBytes</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">guint8</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">;</span>
+<span class="w">  </span><span class="n">gsize</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Set up a worker context for the writes’ callbacks. */</span>
+<span class="w">  </span><span class="n">worker_context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_main_context_new</span><span class="w"> </span><span class="p">();</span>
+<span class="w">  </span><span class="n">g_main_context_push_thread_default</span><span class="w"> </span><span class="p">(</span><span class="n">worker_context</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* Set up the writes. */</span>
+<span class="w">  </span><span class="n">write_data</span><span class="p">.</span><span class="n">n_remaining</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="n">write_data</span><span class="p">.</span><span class="n">main_loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_main_loop_new</span><span class="w"> </span><span class="p">(</span><span class="n">worker_context</span><span class="p">,</span><span class="w"> </span><span class="n">FALSE</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_task_get_task_data</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="w">  </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_bytes_get_data</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">len</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">g_output_stream_write_async</span><span class="w"> </span><span class="p">(</span><span class="n">output_stream1</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">G_PRIORITY_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">write_cb</span><span class="p">,</span>
+<span class="w">                               </span><span class="o">&amp;</span><span class="n">write_data</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_output_stream_write_async</span><span class="w"> </span><span class="p">(</span><span class="n">output_stream2</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">G_PRIORITY_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">write_cb</span><span class="p">,</span>
+<span class="w">                               </span><span class="o">&amp;</span><span class="n">write_data</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* Run the main loop until both writes have finished. */</span>
+<span class="w">  </span><span class="n">g_main_loop_run</span><span class="w"> </span><span class="p">(</span><span class="n">write_data</span><span class="p">.</span><span class="n">main_loop</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_task_return_boolean</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="n">TRUE</span><span class="p">);</span><span class="w">  </span><span class="cm">/* ignore errors */</span>
+
+<span class="w">  </span><span class="n">g_main_loop_unref</span><span class="w"> </span><span class="p">(</span><span class="n">write_data</span><span class="p">.</span><span class="n">main_loop</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">g_main_context_pop_thread_default</span><span class="w"> </span><span class="p">(</span><span class="n">worker_context</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_main_context_unref</span><span class="w"> </span><span class="p">(</span><span class="n">worker_context</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* This can be called from any thread. Its @callback will always be</span>
+<span class="cm"> * dispatched in the thread which currently owns</span>
+<span class="cm"> * @interesting_context. */</span>
+<span class="kt">void</span>
+<span class="nf">parallel_writes_async</span><span class="w"> </span><span class="p">(</span><span class="n">GBytes</span><span class="w">              </span><span class="o">*</span><span class="n">data</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">GMainContext</span><span class="w">        </span><span class="o">*</span><span class="n">interesting_context</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">GCancellable</span><span class="w">        </span><span class="o">*</span><span class="n">cancellable</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">GAsyncReadyCallback</span><span class="w">  </span><span class="n">callback</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">gpointer</span><span class="w">             </span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">GTask</span><span class="w"> </span><span class="o">*</span><span class="n">task</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">g_main_context_push_thread_default</span><span class="w"> </span><span class="p">(</span><span class="n">interesting_context</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_task_new</span><span class="w"> </span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">cancellable</span><span class="p">,</span><span class="w"> </span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="n">user_data</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_task_set_task_data</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
+<span class="w">                        </span><span class="p">(</span><span class="n">GDestroyNotify</span><span class="p">)</span><span class="w"> </span><span class="n">g_bytes_unref</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_task_run_in_thread</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="n">thread_cb</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_object_unref</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">g_main_context_pop_thread_default</span><span class="w"> </span><span class="p">(</span><span class="n">interesting_context</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="implicit-use-of-the-global-default-main-context">
+<h2>Implicit Use of the Global-Default Main Context<a class="headerlink" href="#implicit-use-of-the-global-default-main-context" title="Permalink to this heading">¶</a></h2>
+<p>Several functions implicitly add sources to the global-default main context.
+They should not be used in threaded code. Instead, use <code class="docutils literal notranslate"><span class="pre">g_source_attach()</span></code>
+with the <code class="docutils literal notranslate"><span class="pre">GSource</span></code> created by the replacement function from the table below.</p>
+<p>Implicit use of the global-default main context means the callback functions are
+invoked in the main thread, typically resulting in work being brought back from
+a worker thread into the main thread.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Do not use</p></th>
+<th class="head"><p>Use instead</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">g_timeout_add()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">g_timeout_source_new()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">g_idle_add()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">g_idle_source_new()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">g_child_watch_add()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">g_child_watch_source_new()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>So to delay some computation in a worker thread, use the following code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">guint</span>
+<span class="nf">schedule_computation</span><span class="w"> </span><span class="p">(</span><span class="n">guint</span><span class="w"> </span><span class="n">delay_seconds</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="cm">/* Get the calling context. */</span>
+<span class="w">  </span><span class="n">GMainContext</span><span class="w"> </span><span class="o">*</span><span class="n">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_main_context_get_thread_default</span><span class="w"> </span><span class="p">();</span>
+
+<span class="w">  </span><span class="n">GSource</span><span class="w"> </span><span class="o">*</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_timeout_source_new_seconds</span><span class="w"> </span><span class="p">(</span><span class="n">delay_seconds</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_source_set_callback</span><span class="w"> </span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">do_computation</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">guint</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_source_attach</span><span class="w"> </span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">g_source_unref</span><span class="w"> </span><span class="p">(</span><span class="n">source</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* The ID can be used with the same @context to</span>
+<span class="cm">   * cancel the scheduled computation if needed. */</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">do_computation</span><span class="w"> </span><span class="p">(</span><span class="n">gpointer</span><span class="w"> </span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="using-gmaincontext-in-a-library">
+<h2>Using GMainContext in a Library<a class="headerlink" href="#using-gmaincontext-in-a-library" title="Permalink to this heading">¶</a></h2>
+<p>At a high level, library code must not make changes to main contexts which could
+affect the execution of an application using the library, for example by
+changing when the application’s sources are dispatched. There are various best
+practices which can be followed to aid this.</p>
+<p>Never iterate a context created outside the library, including the
+global-default or thread-default contexts. Otherwise, sources created in the
+application may be dispatched when the application is not expecting it, causing
+re-entrancy problems for the application code.</p>
+<p>Always remove sources from a main context before dropping the library’s last
+reference to the context, especially if it may have been exposed to the
+application (for example, as a thread-default). Otherwise the application may
+keep a reference to the main context and continue iterating it after the library
+has returned, potentially causing unexpected source dispatches in the library.
+This is equivalent to not assuming that dropping the library’s last reference to
+a main context will finalize that context.</p>
+<p>If the library is designed to be used from multiple threads, or in a
+context-aware fashion, always document which context each callback will be
+dispatched in. For example, “callbacks will always be dispatched in the context
+which is the thread-default at the time of the object’s construction”.
+Developers using the library’s API need to know this information.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">g_main_context_invoke()</span></code> to ensure callbacks are dispatched in the right
+context. It’s much easier than manually using <code class="docutils literal notranslate"><span class="pre">g_idle_source_new()</span></code> to
+transfer work between contexts.</p>
+<p>Libraries should never use <code class="docutils literal notranslate"><span class="pre">g_main_context_default()</span></code> (or, equivalently, pass
+NULL to a <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code>-typed parameter). Always store and explicitly use a
+specific <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code>, even if it often points to some default context. This
+makes the code easier to split out into threads in future, if needed, without
+causing hard-to-debug problems caused by callbacks being invoked in the wrong
+context.</p>
+<p>Write things asynchronously internally (using <code class="docutils literal notranslate"><span class="pre">GTask</span></code> where appropriate), and
+keep synchronous wrappers at the very top level of an API, where they can be
+implemented by calling <code class="docutils literal notranslate"><span class="pre">g_main_context_iteration()</span></code> on a specific
+<code class="docutils literal notranslate"><span class="pre">GMainContext</span></code>. Again, this makes future refactoring easier. This is
+demonstrated in the previous example: the thread uses
+<code class="docutils literal notranslate"><span class="pre">g_output_stream_write_async()</span></code> rather than <code class="docutils literal notranslate"><span class="pre">g_output_stream_write()</span></code>. A
+worker thread may be used instead, and this can simplify the callback chain for
+long series of asynchronous calls; but at the cost of increased complexity in
+verifying the code is race-free.</p>
+<p>Always match pushes and pops of the thread-default main context:
+<code class="docutils literal notranslate"><span class="pre">g_main_context_push_thread_default()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">g_main_context_pop_thread_default()</span></code>.</p>
+</section>
+<section id="ensuring-functions-are-called-in-the-right-context">
+<h2>Ensuring Functions are Called in the Right Context<a class="headerlink" href="#ensuring-functions-are-called-in-the-right-context" title="Permalink to this heading">¶</a></h2>
+<p>The ‘right context’ is the thread-default main context of the thread the
+function should be executing in. This assumes the typical case that every thread
+has a single main context running in a main loop. A main context effectively
+provides a work or message queue for the thread — something which the thread can
+periodically check to determine if there is work pending from another thread.
+Putting a message on this queue – invoking a function in another main context –
+will result in it eventually being dispatched in that thread.</p>
+<p>For example, if an application does a long and CPU-intensive computation it
+should schedule this in a background thread so that UI updates in the main
+thread are not blocked. The results of the computation, however, might need to
+be displayed in the UI, so some UI update function must be called in the main
+thread once the computation’s complete.</p>
+<p>Furthermore, if the computation function can be limited to a single thread, it
+becomes easy to eliminate the need for locking a lot of the data it accesses.
+This assumes that other threads are implemented similarly and hence most data is
+only accessed by a single thread, with threads communicating by message passing.
+This allows each thread to update its data at its leisure, which significantly
+simplifies locking.</p>
+<p>For some functions, there might be no reason to care which context they’re
+executed in, perhaps because they’re asynchronous and hence do not block the
+context. However, it is still advisable to be explicit about which context is
+used, since those functions may emit signals or invoke callbacks, and for
+reasons of thread safety it’s necessary to know which threads those signal
+handlers or callbacks are going to be invoked in.</p>
+<p>For example, the progress callback in <code class="docutils literal notranslate"><span class="pre">g_file_copy_async()</span></code> is documented as
+being called in the thread-default main context at the time of the initial call.</p>
+</section>
+<section id="principles-of-invocation">
+<h2>Principles of Invocation<a class="headerlink" href="#principles-of-invocation" title="Permalink to this heading">¶</a></h2>
+<p>The core principle of invoking a function in a specific context is simple, and
+is walked through below to explain the concepts. In practice the convenience
+method, <code class="docutils literal notranslate"><span class="pre">g_main_context_invoke_full()</span></code> should be used instead.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">GSource</span></code> has to be added to the target <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code>, which will invoke
+the function when it’s dispatched. This <code class="docutils literal notranslate"><span class="pre">GSource</span></code> should almost always be an
+idle source created with <code class="docutils literal notranslate"><span class="pre">g_idle_source_new()</span></code>, but this doesn’t have to be
+the case. It could be a timeout source so that the function is executed after a
+delay, for example.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">GSource</span></code> will be dispatched as soon as it’s ready, calling the function
+on the thread’s stack. In the case of an idle source, this will be as soon as
+all sources at a higher priority have been dispatched — this can be tweaked
+using the idle source’s priority parameter with <code class="docutils literal notranslate"><span class="pre">g_source_set_priority()</span></code>. The
+source will typically then be destroyed so the function is only executed once
+(though again, this doesn’t have to be the case).</p>
+<p>Data can be passed between threads as the <code class="docutils literal notranslate"><span class="pre">user_data</span></code> passed to the
+<code class="docutils literal notranslate"><span class="pre">GSource</span></code>’s callback. This is set on the source using
+<code class="docutils literal notranslate"><span class="pre">g_source_set_callback()</span></code>, along with the callback function to invoke. Only a
+single pointer is provided, so if multiple data fields need passing, they must
+be wrapped in an allocated structure.</p>
+<p>The example below demonstrates the underlying principles, but there are
+convenience methods explained below which simplify things.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Main function for the background thread, thread1. */</span>
+<span class="k">static</span><span class="w"> </span><span class="n">gpointer</span>
+<span class="nf">thread1_main</span><span class="w"> </span><span class="p">(</span><span class="n">gpointer</span><span class="w"> </span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">GMainContext</span><span class="w"> </span><span class="o">*</span><span class="n">thread1_main_context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_data</span><span class="p">;</span>
+<span class="w">  </span><span class="n">GMainLoop</span><span class="w"> </span><span class="o">*</span><span class="n">main_loop</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Set up the thread’s context and run it forever. */</span>
+<span class="w">  </span><span class="n">g_main_context_push_thread_default</span><span class="w"> </span><span class="p">(</span><span class="n">thread1_main_context</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">main_loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_main_loop_new</span><span class="w"> </span><span class="p">(</span><span class="n">thread1_main_context</span><span class="p">,</span><span class="w"> </span><span class="n">FALSE</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_main_loop_run</span><span class="w"> </span><span class="p">(</span><span class="n">main_loop</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_main_loop_unref</span><span class="w"> </span><span class="p">(</span><span class="n">main_loop</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">g_main_context_pop_thread_default</span><span class="w"> </span><span class="p">(</span><span class="n">thread1_main_context</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_main_context_unref</span><span class="w"> </span><span class="p">(</span><span class="n">thread1_main_context</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* A data closure structure to carry multiple variables between</span>
+<span class="cm"> * threads. */</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">gchar</span><span class="w">   </span><span class="o">*</span><span class="n">some_string</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+<span class="w">  </span><span class="n">guint</span><span class="w">    </span><span class="n">some_int</span><span class="p">;</span>
+<span class="w">  </span><span class="n">GObject</span><span class="w"> </span><span class="o">*</span><span class="n">some_object</span><span class="p">;</span><span class="w">  </span><span class="cm">/* owned */</span>
+<span class="p">}</span><span class="w"> </span><span class="n">MyFuncData</span><span class="p">;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">my_func_data_free</span><span class="w"> </span><span class="p">(</span><span class="n">MyFuncData</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">g_free</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_string</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_clear_object</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_object</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_free</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">my_func</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w"> </span><span class="o">*</span><span class="n">some_string</span><span class="p">,</span>
+<span class="w">         </span><span class="n">guint</span><span class="w">        </span><span class="n">some_int</span><span class="p">,</span>
+<span class="w">         </span><span class="n">GObject</span><span class="w">     </span><span class="o">*</span><span class="n">some_object</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="cm">/* Do something long and CPU intensive! */</span>
+<span class="p">}</span>
+
+<span class="cm">/* Convert an idle callback into a call to my_func(). */</span>
+<span class="k">static</span><span class="w"> </span><span class="n">gboolean</span>
+<span class="nf">my_func_idle</span><span class="w"> </span><span class="p">(</span><span class="n">gpointer</span><span class="w"> </span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">MyFuncData</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_data</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">my_func</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_string</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_int</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_object</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">G_SOURCE_REMOVE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Function to be called in the main thread to schedule a call to</span>
+<span class="cm"> * my_func() in thread1, passing the given parameters along. */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">invoke_my_func</span><span class="w"> </span><span class="p">(</span><span class="n">GMainContext</span><span class="w"> </span><span class="o">*</span><span class="n">thread1_main_context</span><span class="p">,</span>
+<span class="w">                </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w">  </span><span class="o">*</span><span class="n">some_string</span><span class="p">,</span>
+<span class="w">                </span><span class="n">guint</span><span class="w">         </span><span class="n">some_int</span><span class="p">,</span>
+<span class="w">                </span><span class="n">GObject</span><span class="w">      </span><span class="o">*</span><span class="n">some_object</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">GSource</span><span class="w"> </span><span class="o">*</span><span class="n">idle_source</span><span class="p">;</span>
+<span class="w">  </span><span class="n">MyFuncData</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Create a data closure to pass all the desired variables</span>
+<span class="cm">   * between threads. */</span>
+<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_new0</span><span class="w"> </span><span class="p">(</span><span class="n">MyFuncData</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_strdup</span><span class="w"> </span><span class="p">(</span><span class="n">some_string</span><span class="p">);</span>
+<span class="w">  </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_int</span><span class="p">;</span>
+<span class="w">  </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_object_ref</span><span class="w"> </span><span class="p">(</span><span class="n">some_object</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* Create a new idle source, set my_func() as the callback with</span>
+<span class="cm">   * some data to be passed between threads, bump up the priority</span>
+<span class="cm">   * and schedule it by attaching it to thread1’s context. */</span>
+<span class="w">  </span><span class="n">idle_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_idle_source_new</span><span class="w"> </span><span class="p">();</span>
+<span class="w">  </span><span class="n">g_source_set_callback</span><span class="w"> </span><span class="p">(</span><span class="n">idle_source</span><span class="p">,</span><span class="w"> </span><span class="n">my_func_idle</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
+<span class="w">                         </span><span class="p">(</span><span class="n">GDestroyNotify</span><span class="p">)</span><span class="w"> </span><span class="n">my_func_data_free</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_source_set_priority</span><span class="w"> </span><span class="p">(</span><span class="n">idle_source</span><span class="p">,</span><span class="w"> </span><span class="n">G_PRIORITY_DEFAULT</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_source_attach</span><span class="w"> </span><span class="p">(</span><span class="n">idle_source</span><span class="p">,</span><span class="w"> </span><span class="n">thread1_main_context</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_source_unref</span><span class="w"> </span><span class="p">(</span><span class="n">idle_source</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Main function for the main thread. */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">GThread</span><span class="w"> </span><span class="o">*</span><span class="n">thread1</span><span class="p">;</span>
+<span class="w">  </span><span class="n">GMainContext</span><span class="w"> </span><span class="o">*</span><span class="n">thread1_main_context</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Spawn a background thread and pass it a reference to its</span>
+<span class="cm">   * GMainContext. Retain a reference for use in this thread</span>
+<span class="cm">   * too. */</span>
+<span class="w">  </span><span class="n">thread1_main_context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_main_context_new</span><span class="w"> </span><span class="p">();</span>
+<span class="w">  </span><span class="n">g_thread_new</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;thread1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">thread1_main</span><span class="p">,</span>
+<span class="w">                </span><span class="n">g_main_context_ref</span><span class="w"> </span><span class="p">(</span><span class="n">thread1_main_context</span><span class="p">));</span>
+
+<span class="w">  </span><span class="cm">/* Maybe set up your UI here, for example. */</span>
+
+<span class="w">  </span><span class="cm">/* Invoke my_func() in the other thread. */</span>
+<span class="w">  </span><span class="n">invoke_my_func</span><span class="w"> </span><span class="p">(</span><span class="n">thread1_main_context</span><span class="p">,</span>
+<span class="w">                  </span><span class="s">&quot;some data which needs passing between threads&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">123456</span><span class="p">,</span><span class="w"> </span><span class="n">some_object</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* Continue doing other work. */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This invocation is uni-directional: it calls <code class="docutils literal notranslate"><span class="pre">my_func()</span></code> in <code class="docutils literal notranslate"><span class="pre">thread1</span></code>, but
+there’s no way to return a value to the main thread. To do that, the same
+principle needs to be used again, invoking a callback function in the main
+thread. It’s a straightforward extension which isn’t covered here.</p>
+<p>To maintain thread safety, data which is potentially accessed by multiple
+threads must make those accesses mutually exclusive using a mutex. Data
+potentially accessed by multiple threads: <code class="docutils literal notranslate"><span class="pre">thread1_main_context</span></code>, passed in
+the fork call to <code class="docutils literal notranslate"><span class="pre">thread1_main</span></code>; and <code class="docutils literal notranslate"><span class="pre">some_object</span></code>, a reference to which is
+passed in the data closure. Critically, GLib guarantees that <code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> is
+thread safe, so sharing <code class="docutils literal notranslate"><span class="pre">thread1_main_context</span></code> between threads is safe. The
+example assumes that other code accessing <code class="docutils literal notranslate"><span class="pre">some_object</span></code> is thread safe.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">some_string</span></code> and <code class="docutils literal notranslate"><span class="pre">some_int</span></code> cannot be accessed from both threads,
+because copies of them are passed to <code class="docutils literal notranslate"><span class="pre">thread1</span></code>, rather than the originals.
+This is a standard technique for making cross-thread calls thread safe without
+requiring locking. It also avoids the problem of synchronizing freeing
+<code class="docutils literal notranslate"><span class="pre">some_string</span></code>.</p>
+<p>Similarly, a reference to <code class="docutils literal notranslate"><span class="pre">some_object</span></code> is transferred to <code class="docutils literal notranslate"><span class="pre">thread1</span></code>, which
+works around the issue of synchronizing destruction of the object.</p>
+<p><code class="docutils literal notranslate"><span class="pre">g_idle_source_new()</span></code> is used rather than the simpler <code class="docutils literal notranslate"><span class="pre">g_idle_add()</span></code> so the
+<code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> to attach to can be specified.</p>
+</section>
+<section id="convenience-method-g-main-context-invoke-full">
+<h2>Convenience Method: g_main_context_invoke_full()<a class="headerlink" href="#convenience-method-g-main-context-invoke-full" title="Permalink to this heading">¶</a></h2>
+<p>This is simplified greatly by the convenience method,
+<code class="docutils literal notranslate"><span class="pre">g_main_context_invoke_full()</span></code>. It invokes a callback so that the specified
+<code class="docutils literal notranslate"><span class="pre">GMainContext</span></code> is owned during the invocation. Owning a main context is almost
+always equivalent to running it, and hence the function is invoked in the thread
+for which the specified context is the thread-default.</p>
+<p><code class="docutils literal notranslate"><span class="pre">g_main_context_invoke()</span></code> can be used instead if the user data does not need
+to be freed by a <code class="docutils literal notranslate"><span class="pre">GDestroyNotify</span></code> callback after the invocation returns.</p>
+<p>Modifying the earlier example, the <code class="docutils literal notranslate"><span class="pre">invoke_my_func()</span></code> function can be replaced
+by the following:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">invoke_my_func</span><span class="w"> </span><span class="p">(</span><span class="n">GMainContext</span><span class="w"> </span><span class="o">*</span><span class="n">thread1_main_context</span><span class="p">,</span>
+<span class="w">                </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w">  </span><span class="o">*</span><span class="n">some_string</span><span class="p">,</span>
+<span class="w">                </span><span class="n">guint</span><span class="w">         </span><span class="n">some_int</span><span class="p">,</span>
+<span class="w">                </span><span class="n">GObject</span><span class="w">      </span><span class="o">*</span><span class="n">some_object</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">MyFuncData</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Create a data closure to pass all the desired variables</span>
+<span class="cm">   * between threads. */</span>
+<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_new0</span><span class="w"> </span><span class="p">(</span><span class="n">MyFuncData</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_strdup</span><span class="w"> </span><span class="p">(</span><span class="n">some_string</span><span class="p">);</span>
+<span class="w">  </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_int</span><span class="p">;</span>
+<span class="w">  </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_object_ref</span><span class="w"> </span><span class="p">(</span><span class="n">some_object</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* Invoke the function. */</span>
+<span class="w">  </span><span class="n">g_main_context_invoke_full</span><span class="w"> </span><span class="p">(</span><span class="n">thread1_main_context</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">G_PRIORITY_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="n">my_func_idle</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">data</span><span class="p">,</span>
+<span class="w">                              </span><span class="p">(</span><span class="n">GDestroyNotify</span><span class="p">)</span><span class="w"> </span><span class="n">my_func_data_free</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Consider what happens if <code class="docutils literal notranslate"><span class="pre">invoke_my_func()</span></code> were called from <code class="docutils literal notranslate"><span class="pre">thread1</span></code>,
+rather than from the main thread. With the original implementation, the idle
+source would be added to <code class="docutils literal notranslate"><span class="pre">thread1</span></code>’s context and dispatched on the context’s
+next iteration (assuming no pending dispatches with higher priorities). With the
+improved implementation, <code class="docutils literal notranslate"><span class="pre">g_main_context_invoke_full()</span></code> will notice that the
+specified context is already owned by the thread (or ownership can be acquired
+by it), and will call <code class="docutils literal notranslate"><span class="pre">my_func_idle()</span></code> directly, rather than attaching a
+source to the context and delaying the invocation to the next context iteration.</p>
+<p>This subtle behavior difference doesn’t matter in most cases, but is worth
+bearing in mind since it can affect blocking behavior (<code class="docutils literal notranslate"><span class="pre">invoke_my_func()</span></code>
+would go from taking negligible time, to taking the same amount of time as
+<code class="docutils literal notranslate"><span class="pre">my_func()</span></code> before returning).</p>
+</section>
+<section id="checking-threading">
+<h2>Checking Threading<a class="headerlink" href="#checking-threading" title="Permalink to this heading">¶</a></h2>
+<p>It is useful to document which thread each function should be called in, in the form of an assertion:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g_assert</span> <span class="p">(</span><span class="n">g_main_context_is_owner</span> <span class="p">(</span><span class="n">expected_main_context</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If that’s put at the top of each function, any assertion failure will highlight
+a case where a function has been called from the wrong thread. It is much easier
+to write these assertions when initially developing code, rather than debugging
+race conditions which can easily result from a function being called in the
+wrong thread.</p>
+<p>This technique can also be applied to signal emissions and callbacks, improving
+type safety as well as asserting the right context is used. Note that signal
+emission via <code class="docutils literal notranslate"><span class="pre">g_signal_emit()</span></code> is synchronous, and doesn’t involve a main
+context at all.</p>
+<p>For example, instead of using the following when emitting a signal:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">guint</span><span class="w"> </span><span class="n">param1</span><span class="p">;</span><span class="w">  </span><span class="cm">/* arbitrary example parameters */</span>
+<span class="n">gchar</span><span class="w"> </span><span class="o">*</span><span class="n">param2</span><span class="p">;</span>
+<span class="n">guint</span><span class="w"> </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="n">g_signal_emit_by_name</span><span class="w"> </span><span class="p">(</span><span class="n">my_object</span><span class="p">,</span>
+<span class="w">                       </span><span class="s">&quot;some-signal&quot;</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">param1</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">param2</span><span class="p">,</span>
+<span class="w">                       </span><span class="o">&amp;</span><span class="n">retval</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The following can be used:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">guint</span>
+<span class="nf">emit_some_signal</span><span class="w"> </span><span class="p">(</span><span class="n">GObject</span><span class="w">     </span><span class="o">*</span><span class="n">my_object</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">guint</span><span class="w">        </span><span class="n">param1</span><span class="p">,</span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w"> </span><span class="o">*</span><span class="n">param2</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">guint</span><span class="w"> </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">g_assert</span><span class="w"> </span><span class="p">(</span><span class="n">g_main_context_is_owner</span><span class="w"> </span><span class="p">(</span><span class="n">expected_main_context</span><span class="p">));</span>
+
+<span class="w">  </span><span class="n">g_signal_emit_by_name</span><span class="w"> </span><span class="p">(</span><span class="n">my_object</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;some-signal&quot;</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">param1</span><span class="p">,</span><span class="w"> </span><span class="n">param2</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">retval</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="gtask">
+<h2>GTask<a class="headerlink" href="#gtask" title="Permalink to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">GTask</span></code> provides a slightly different approach to invoking functions in other
+threads, which is more suited to the case where a function should be executed in
+some background thread, but not a specific one.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GTask</span></code> takes a data closure and a function to execute, and provides ways to
+return the result from this function. It handles everything necessary to run
+that function in an arbitrary thread belonging to some thread pool internal to
+GLib.</p>
+<p>By combining <code class="docutils literal notranslate"><span class="pre">g_main_context_invoke_full()</span></code> and <code class="docutils literal notranslate"><span class="pre">GTask</span></code>, it is possible to
+run a task in a specific context and effortlessly return its result to the
+current context:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* This will be invoked in thread1. */</span>
+<span class="k">static</span><span class="w"> </span><span class="n">gboolean</span>
+<span class="nf">my_func_idle</span><span class="w"> </span><span class="p">(</span><span class="n">gpointer</span><span class="w"> </span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">GTask</span><span class="w"> </span><span class="o">*</span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G_TASK</span><span class="w"> </span><span class="p">(</span><span class="n">user_data</span><span class="p">);</span>
+<span class="w">  </span><span class="n">MyFuncData</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">;</span>
+<span class="w">  </span><span class="n">gboolean</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Call my_func() and propagate its returned boolean to</span>
+<span class="cm">   * the main thread. */</span>
+<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_task_get_task_data</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="w">  </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_func</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_string</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_int</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_object</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_task_return_boolean</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="n">retval</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">G_SOURCE_REMOVE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Whichever thread this is invoked in, the @callback will be</span>
+<span class="cm"> * invoked in, once my_func() has finished and returned a result. */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span>
+<span class="nf">invoke_my_func_with_result</span><span class="w"> </span><span class="p">(</span><span class="n">GMainContext</span><span class="w">        </span><span class="o">*</span><span class="n">thread1_main_context</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">gchar</span><span class="w">         </span><span class="o">*</span><span class="n">some_string</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">guint</span><span class="w">                </span><span class="n">some_int</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">GObject</span><span class="w">             </span><span class="o">*</span><span class="n">some_object</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">GAsyncReadyCallback</span><span class="w">  </span><span class="n">callback</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">gpointer</span><span class="w">             </span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">MyFuncData</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Create a data closure to pass all the desired variables</span>
+<span class="cm">   * between threads. */</span>
+<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_new0</span><span class="w"> </span><span class="p">(</span><span class="n">MyFuncData</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_strdup</span><span class="w"> </span><span class="p">(</span><span class="n">some_string</span><span class="p">);</span>
+<span class="w">  </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_int</span><span class="p">;</span>
+<span class="w">  </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">some_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_object_ref</span><span class="w"> </span><span class="p">(</span><span class="n">some_object</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* Create a GTask to handle returning the result to the current</span>
+<span class="cm">   * thread-default main context. */</span>
+<span class="w">  </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_task_new</span><span class="w"> </span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="n">user_data</span><span class="p">);</span>
+<span class="w">  </span><span class="n">g_task_set_task_data</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
+<span class="w">                        </span><span class="p">(</span><span class="n">GDestroyNotify</span><span class="p">)</span><span class="w"> </span><span class="n">my_func_data_free</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* Invoke the function. */</span>
+<span class="w">  </span><span class="n">g_main_context_invoke_full</span><span class="w"> </span><span class="p">(</span><span class="n">thread1_main_context</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">G_PRIORITY_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="n">my_func_idle</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">task</span><span class="p">,</span>
+<span class="w">                              </span><span class="p">(</span><span class="n">GDestroyNotify</span><span class="p">)</span><span class="w"> </span><span class="n">g_object_unref</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, GNUstep contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Main Contexts</a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#what-is-gmaincontext">What is GMainContext?</a></li>
+<li><a class="reference internal" href="#what-is-gmainloop">What is GMainLoop?</a></li>
+<li><a class="reference internal" href="#default-contexts">Default Contexts</a></li>
+<li><a class="reference internal" href="#implicit-use-of-the-global-default-main-context">Implicit Use of the Global-Default Main Context</a></li>
+<li><a class="reference internal" href="#using-gmaincontext-in-a-library">Using GMainContext in a Library</a></li>
+<li><a class="reference internal" href="#ensuring-functions-are-called-in-the-right-context">Ensuring Functions are Called in the Right Context</a></li>
+<li><a class="reference internal" href="#principles-of-invocation">Principles of Invocation</a></li>
+<li><a class="reference internal" href="#convenience-method-g-main-context-invoke-full">Convenience Method: g_main_context_invoke_full()</a></li>
+<li><a class="reference internal" href="#checking-threading">Checking Threading</a></li>
+<li><a class="reference internal" href="#gtask">GTask</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=359c27e9"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    </body>
+</html>
