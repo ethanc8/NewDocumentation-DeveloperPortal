@@ -1,4 +1,4 @@
-```{eval-rst}
+<!-- ```{eval-rst}
 .. sectnum::
 ```
 
@@ -1583,4 +1583,4 @@ By extensionality:
 
 $$
 (+(b ↑ c)); (↑a) = (↑a); (+b); (↑c)
-$$
+$$ -->

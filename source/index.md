@@ -55,6 +55,6 @@ If you want to contribute to the GNOME developer documentation, you can find it
 introduction
 guidelines
 tools
-tutorials
-specifications
 ```
+% tutorials
+% specifications
