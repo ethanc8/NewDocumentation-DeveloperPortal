@@ -100,13 +100,20 @@ PDF and SVG. Cairo graphics are resolution-independent and antialiased.
 
 ### Opal (`CoreGraphics`)
 
-[Opal](https://github.com/gnustep/libs-opal) is GNUstep's wrapper around Cairo, which provides a similar API to macOS's CoreGraphics/Quartz 2D frameworks. It also provides ways to connect Cairo with GNUstep GUI.
+[Opal](https://github.com/gnustep/libs-opal) is GNUstep's wrapper around Cairo, which provides a similar API to macOS's CoreGraphics/Quartz 2D framework. It also provides ways to connect Cairo with GNUstep GUI.
+
+### GSQuartzCore (`CoreAnimation`)
+
+[GSQuartzCore](https://github.com/gnustep/libs-quartzcore) provides APIs for animating views and Opal graphics. It provides a similar API to macOS's Core Animation/Quartz Core framework. Unfortunately, it currently does not work well with GNUstep GUI. We are currently trying to solve this issue.
 
 ## IPC
 
 ### Distributed Objects
 
+GNUstep Distributed Objects (GDO) is a powerful and easy-to-use system for communicating between GNUstep programs. It's similar to Apple/NeXT's Distributed Objects, but is more powerful. For example it features TLS support (although this is not well documented). GNUstep Distributed Objects is part of GNUstep Base.
 
+- [Distributed Objects manual](https://wwwmain.gnustep.org/resources/documentation/Developer/Base/ProgrammingManual/manual_7.html#Distributed-Objects)
+- [Nicola Pero's Distributed Objects mini-tutorial](https://home.gnustep.org/nicola/Tutorials/DistributedObjects/index.html)
 
 ### DBusKit
 
@@ -116,9 +123,12 @@ applications and services. Applications can use D-Bus to communicate with
 system services, such as hardware-related daemons, or for communication between
 their own processes.
 
-GDBus is included in the GIO library, and provides a comprehensive
+[DBusKit](https://github.com/gnustep/libs-dbuskit) provides a comprehensive
 implementation of the D-Bus protocol, as well as high-level API to implement
 both providers and consumers of D-Bus interfaces.
+
+- [DBusKit API reference](https://ethanc8.github.io/Sphinx-Documentation/RawHTML/DBusKit/Reference/index.html)
+- [DBusKit manual](https://ethanc8.github.io/Sphinx-Documentation/RawHTML/DBusKit/ProgrammingManual/DBusKit/Introduction.html)
 
 ## Settings: Defaults
 
@@ -136,14 +146,15 @@ which are suitable for a range of requirements and needs.
 **TODO: Is this correct?**
 
 [GDL2](https://github.com/gnustep/libs-gdl2) is a library which provides access to multiple SQL-based relational
-databases, including SQLite, MySQL, Postgres, MSAccess and more. Databases can
-either be local or remotely hosted. libgda includes a number of tools,
-including a SQL console, a data sources administration tool, and a database
-browser. GDL2's API is similar to NeXT's Enterprise Objects Framework.
+databases. It is suitable for use both on the client side and as part of a hosted service. GDL2's API is similar to NeXT's Enterprise Objects Framework.
 
 - [GDL2 API reference](https://wwwmain.gnustep.org/resources/documentation/Developer/GDL2/GDL2.html)
 
-## GNUstep CoreData (`CoreData`)
+## GSCoreData (`CoreData`)
+
+[GSCoreData](https://gscoredata.nongnu.org/) provides a simpler way to access relational databases, designed for desktop applications. It has a custom relational database. GSCoreData's API is similar to Apple's Core Data.
+
+- [GSCoreData source code](https://github.com/gnustep/libs-gscoredata)
 
 ## Networking
 

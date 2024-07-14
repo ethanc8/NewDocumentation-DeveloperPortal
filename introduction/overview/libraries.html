@@ -402,13 +402,22 @@ PDF and SVG. Cairo graphics are resolution-independent and antialiased.</p>
 </section>
 <section id="opal-coregraphics">
 <h3>Opal (<code class="docutils literal notranslate"><span class="pre">CoreGraphics</span></code>)<a class="headerlink" href="#opal-coregraphics" title="Permalink to this heading">¶</a></h3>
-<p><a class="reference external" href="https://github.com/gnustep/libs-opal">Opal</a> is GNUstep’s wrapper around Cairo, which provides a similar API to macOS’s CoreGraphics/Quartz 2D frameworks. It also provides ways to connect Cairo with GNUstep GUI.</p>
+<p><a class="reference external" href="https://github.com/gnustep/libs-opal">Opal</a> is GNUstep’s wrapper around Cairo, which provides a similar API to macOS’s CoreGraphics/Quartz 2D framework. It also provides ways to connect Cairo with GNUstep GUI.</p>
+</section>
+<section id="gsquartzcore-coreanimation">
+<h3>GSQuartzCore (<code class="docutils literal notranslate"><span class="pre">CoreAnimation</span></code>)<a class="headerlink" href="#gsquartzcore-coreanimation" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://github.com/gnustep/libs-quartzcore">GSQuartzCore</a> provides APIs for animating views and Opal graphics. It provides a similar API to macOS’s Core Animation/Quartz Core framework. Unfortunately, it currently does not work well with GNUstep GUI. We are currently trying to solve this issue.</p>
 </section>
 </section>
 <section id="ipc">
 <h2>IPC<a class="headerlink" href="#ipc" title="Permalink to this heading">¶</a></h2>
 <section id="distributed-objects">
 <h3>Distributed Objects<a class="headerlink" href="#distributed-objects" title="Permalink to this heading">¶</a></h3>
+<p>GNUstep Distributed Objects (GDO) is a powerful and easy-to-use system for communicating between GNUstep programs. It’s similar to Apple/NeXT’s Distributed Objects, but is more powerful. For example it features TLS support (although this is not well documented). GNUstep Distributed Objects is part of GNUstep Base.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://wwwmain.gnustep.org/resources/documentation/Developer/Base/ProgrammingManual/manual_7.html#Distributed-Objects">Distributed Objects manual</a></p></li>
+<li><p><a class="reference external" href="https://home.gnustep.org/nicola/Tutorials/DistributedObjects/index.html">Nicola Pero’s Distributed Objects mini-tutorial</a></p></li>
+</ul>
 </section>
 <section id="dbuskit">
 <h3>DBusKit<a class="headerlink" href="#dbuskit" title="Permalink to this heading">¶</a></h3>
@@ -417,9 +426,13 @@ primary IPC systems used in GNUstep, and is used for communication between both
 applications and services. Applications can use D-Bus to communicate with
 system services, such as hardware-related daemons, or for communication between
 their own processes.</p>
-<p>GDBus is included in the GIO library, and provides a comprehensive
+<p><a class="reference external" href="https://github.com/gnustep/libs-dbuskit">DBusKit</a> provides a comprehensive
 implementation of the D-Bus protocol, as well as high-level API to implement
 both providers and consumers of D-Bus interfaces.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ethanc8.github.io/Sphinx-Documentation/RawHTML/DBusKit/Reference/index.html">DBusKit API reference</a></p></li>
+<li><p><a class="reference external" href="https://ethanc8.github.io/Sphinx-Documentation/RawHTML/DBusKit/ProgrammingManual/DBusKit/Introduction.html">DBusKit manual</a></p></li>
+</ul>
 </section>
 </section>
 <section id="settings-defaults">
@@ -439,17 +452,18 @@ which are suitable for a range of requirements and needs.</p>
 <h3>GDL2<a class="headerlink" href="#gdl2" title="Permalink to this heading">¶</a></h3>
 <p><strong>TODO: Is this correct?</strong></p>
 <p><a class="reference external" href="https://github.com/gnustep/libs-gdl2">GDL2</a> is a library which provides access to multiple SQL-based relational
-databases, including SQLite, MySQL, Postgres, MSAccess and more. Databases can
-either be local or remotely hosted. libgda includes a number of tools,
-including a SQL console, a data sources administration tool, and a database
-browser. GDL2’s API is similar to NeXT’s Enterprise Objects Framework.</p>
+databases. It is suitable for use both on the client side and as part of a hosted service. GDL2’s API is similar to NeXT’s Enterprise Objects Framework.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://wwwmain.gnustep.org/resources/documentation/Developer/GDL2/GDL2.html">GDL2 API reference</a></p></li>
 </ul>
 </section>
 </section>
-<section id="gnustep-coredata-coredata">
-<h2>GNUstep CoreData (<code class="docutils literal notranslate"><span class="pre">CoreData</span></code>)<a class="headerlink" href="#gnustep-coredata-coredata" title="Permalink to this heading">¶</a></h2>
+<section id="gscoredata-coredata">
+<h2>GSCoreData (<code class="docutils literal notranslate"><span class="pre">CoreData</span></code>)<a class="headerlink" href="#gscoredata-coredata" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://gscoredata.nongnu.org/">GSCoreData</a> provides a simpler way to access relational databases, designed for desktop applications. It has a custom relational database. GSCoreData’s API is similar to Apple’s Core Data.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/gnustep/libs-gscoredata">GSCoreData source code</a></p></li>
+</ul>
 </section>
 <section id="networking">
 <h2>Networking<a class="headerlink" href="#networking" title="Permalink to this heading">¶</a></h2>
@@ -554,6 +568,7 @@ proxies, names and services.</p>
 <li><a class="reference internal" href="#d-drawing">2D Drawing</a><ul>
 <li><a class="reference internal" href="#cairo">Cairo</a></li>
 <li><a class="reference internal" href="#opal-coregraphics">Opal (<code class="docutils literal notranslate"><span class="pre">CoreGraphics</span></code>)</a></li>
+<li><a class="reference internal" href="#gsquartzcore-coreanimation">GSQuartzCore (<code class="docutils literal notranslate"><span class="pre">CoreAnimation</span></code>)</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ipc">IPC</a><ul>
@@ -568,7 +583,7 @@ proxies, names and services.</p>
 <li><a class="reference internal" href="#gdl2">GDL2</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#gnustep-coredata-coredata">GNUstep CoreData (<code class="docutils literal notranslate"><span class="pre">CoreData</span></code>)</a></li>
+<li><a class="reference internal" href="#gscoredata-coredata">GSCoreData (<code class="docutils literal notranslate"><span class="pre">CoreData</span></code>)</a></li>
 <li><a class="reference internal" href="#networking">Networking</a><ul>
 <li><a class="reference internal" href="#foundation-networking">Foundation Networking</a></li>
 <li><a class="reference internal" href="#tls-dns-support">TLS &amp; DNS support</a></li>
