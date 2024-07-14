@@ -1,13 +1,13 @@
 # The Importance of Writing Good Code
 
-GNOME is a very ambitious free software project, and it is composed of many
+GNUstep is a very ambitious free software project, and it is composed of many
 software packages that are more or less independent of each other. A lot of the
-work in GNOME is done by volunteers: although there are many people working on
-GNOME full-time or part-time for here, volunteers still make up a large
+work in GNUstep is done by volunteers: although there are many people working on
+GNUstep full-time or part-time for here, volunteers still make up a large
 percentage of our contributors. Programmers may come and go at any time and they
-will be able to dedicate different amounts of time to the GNOME project.
+will be able to dedicate different amounts of time to the GNUstep project.
 People’s “real world” responsibilities may change, and this will be reflected in
-the amount of time that they can devote to GNOME.
+the amount of time that they can devote to GNUstep.
 
 Software development takes long amounts of time and painstaking effort. This is
 why most part-time volunteers cannot start big projects by themselves; it is
@@ -65,4 +65,4 @@ The following are some important qualities of good code:
 - [Code Complete](http://www.cc2e.com/), by Steve McConnell
 - [Refactoring: Improving the Design of Existing Code](http://martinfowler.com/books/refactoring.html), by Martin Fowler.
 - [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns), by Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides.
-- [Object-Oriented Design Heuristics](http://astore.amazon.com/gnomestore-20/detail/020163385X), by Arthur Riel.
+- [Object-Oriented Design Heuristics](http://astore.amazon.com/GNUstepstore-20/detail/020163385X), by Arthur Riel.
