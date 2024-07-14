@@ -1,0 +1,11 @@
+name: NewDocumentation
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python
+  - pip
+  - sphinx
+  - sphinx-design
+  - furo
+  - rst-to-myst
