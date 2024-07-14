@@ -304,7 +304,7 @@
 <h1>Optimizing GNOME Applications<a class="headerlink" href="#optimizing-gnome-applications" title="Permalink to this heading">¶</a></h1>
 <section id="what-are-we-optimizing">
 <h2>What are we optimizing?<a class="headerlink" href="#what-are-we-optimizing" title="Permalink to this heading">¶</a></h2>
-<p>When we optimize for GNOME the first thing to remember is this: we are not
+<p>When we optimize our applications the first thing to remember is this: we are not
 trying to make the program better, we are trying to make the person using the
 computer happier.</p>
 <p>Better programs make people happier, but there are some improvements that will
@@ -314,8 +314,8 @@ two programs are open.</p>
 <p>Traditional optimization tackles concepts like CPU use, code size, the number of
 mouse clicks and the memory use of the program. This second list has been chosen
 to correlate with the first list, however there is an important difference: the
-person using GNOME doesn’t care about the second list, but they care a lot about
-the first list. When optimizing GNOME programs we will reduce CPU use, memory
+person using your app doesn’t care about the second list, but they care a lot about
+the first list. When optimizing our programs we will reduce CPU use, memory
 use and all those things, but these are the means to the end, not the final
 goal. We are optimizing for people.</p>
 </section>
@@ -412,6 +412,7 @@ thousand times. Avoid calling slow code often.</p>
 <code class="docutils literal notranslate"><span class="pre">G_INLINE_FUNC</span></code> for short, frequently called, functions. Look up
 <code class="docutils literal notranslate"><span class="pre">G_GNUC_PURE</span></code>, <code class="docutils literal notranslate"><span class="pre">G_LIKELY</span></code> and the other GLib miscellaneous macros. Use the
 macros instead of compiler-specific keywords to ensure portability.</p>
+<p><strong>TODO: Determine the appropriate GNUstep equivalents, or add equivalent macros to GNUstep Base Additions</strong></p>
 <p>5. Don’t use assembly language. It is not portable and, while it may be fast on
 one processor, it is not even guaranteed to be fast on every processor that
 supports that architecture.</p>
@@ -420,7 +421,7 @@ unnecessarily slow. Many CPU-intensive library routines have already been
 optimized. Conversely, some library routines are slow, especially ones that make
 system calls to the operating system.</p>
 <p>7. Minimize the number of libraries you link to. The fewer libraries to link in,
-the faster the program starts. This can be a difficult thing to do with GNOME.</p>
+the faster the program starts.</p>
 </section>
 <section id="high-level-tricks">
 <h3>High level tricks<a class="headerlink" href="#high-level-tricks" title="Permalink to this heading">¶</a></h3>

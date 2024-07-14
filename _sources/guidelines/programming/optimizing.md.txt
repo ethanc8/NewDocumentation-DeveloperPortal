@@ -2,7 +2,7 @@
 
 ## What are we optimizing?
 
-When we optimize for GNOME the first thing to remember is this: we are not
+When we optimize our applications the first thing to remember is this: we are not
 trying to make the program better, we are trying to make the person using the
 computer happier.
 
@@ -14,8 +14,8 @@ two programs are open.
 Traditional optimization tackles concepts like CPU use, code size, the number of
 mouse clicks and the memory use of the program. This second list has been chosen
 to correlate with the first list, however there is an important difference: the
-person using GNOME doesn't care about the second list, but they care a lot about
-the first list. When optimizing GNOME programs we will reduce CPU use, memory
+person using your app doesn't care about the second list, but they care a lot about
+the first list. When optimizing our programs we will reduce CPU use, memory
 use and all those things, but these are the means to the end, not the final
 goal. We are optimizing for people.
 
@@ -127,6 +127,8 @@ thousand times. Avoid calling slow code often.
 `G_GNUC_PURE`, `G_LIKELY` and the other GLib miscellaneous macros. Use the
 macros instead of compiler-specific keywords to ensure portability.
 
+**TODO: Determine the appropriate GNUstep equivalents, or add equivalent macros to GNUstep Base Additions**
+
 5\. Don't use assembly language. It is not portable and, while it may be fast on
 one processor, it is not even guaranteed to be fast on every processor that
 supports that architecture.
@@ -137,7 +139,7 @@ optimized. Conversely, some library routines are slow, especially ones that make
 system calls to the operating system.
 
 7\. Minimize the number of libraries you link to. The fewer libraries to link in,
-the faster the program starts. This can be a difficult thing to do with GNOME.
+the faster the program starts.
 
 ### High level tricks
 

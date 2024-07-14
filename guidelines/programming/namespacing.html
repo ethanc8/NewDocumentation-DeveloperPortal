@@ -318,41 +318,38 @@ these problems by using a unique, consistent prefix for every symbol and
 filename in a project, grouping symbols into their projects and separating them
 from others.</p>
 <p>The conventions below should be used for namespacing all symbols. They are used
-in all GLib-based projects, so should be familiar to a lot of developers:</p>
+in all Cocoa and Carbon programs, so should be familiar to a lot of developers:</p>
 <ul class="simple">
-<li><p>Functions should use <code class="docutils literal notranslate"><span class="pre">lower_case_with_underscores</span></code> (also known as <em>snake
-case</em>).</p></li>
-<li><p>Structures, types and objects should use <code class="docutils literal notranslate"><span class="pre">CamelCaseWithoutUnderscores</span></code>.</p></li>
-<li><p>Macros and constants should use <code class="docutils literal notranslate"><span class="pre">UPPER_CASE_WITH_UNDERSCORES</span></code>.</p></li>
-<li><p>All symbols should be prefixed with a short (2–4 characters) version of the
+<li><p>Functions should use <code class="docutils literal notranslate"><span class="pre">camelCaseWithoutUnderscores</span></code>.</p></li>
+<li><p>Structures and types should use <code class="docutils literal notranslate"><span class="pre">CamelCaseWithoutUnderscores</span></code>.</p></li>
+<li><p>Macros and constants should use <code class="docutils literal notranslate"><span class="pre">UPPER_CASE_WITH_UNDERSCORES</span></code> or <code class="docutils literal notranslate"><span class="pre">kCamelCaseWithoutUnderscores</span></code> (the <code class="docutils literal notranslate"><span class="pre">k</span></code> represents “constant”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span></code> variables and global objects should use <code class="docutils literal notranslate"><span class="pre">kCamelCaseWithoutUnderscores</span></code> (the <code class="docutils literal notranslate"><span class="pre">k</span></code> represents “constant”).</p></li>
+<li><p>All symbols should be prefixed with a short (3–4 characters) all-caps version of the
 namespace. This is shortened purely for ease of typing, but should still be
-unique.</p></li>
-<li><p>All methods of a class should also be prefixed with the class name.</p></li>
+unique.</p>
+<ul>
+<li><p>While many existing namespaces are only 2 characters, we recommend that you do not create new 2-character namespaces because it’s likely that they will conflict with existing namespaces, and Apple will create as many 2-character namespaces as they’d like regardless of whether it breaks your application.</p></li>
+</ul>
+</li>
+<li><p>All methods of a CoreFoundation/Carbon class should also be prefixed with the class name.</p></li>
+<li><p>All methods of an Objective-C/Cocoa class should use <code class="docutils literal notranslate"><span class="pre">camelCaseWithoutUnderscores</span></code>.</p></li>
 </ul>
 <p>Additionally, public headers should be included from a subdirectory, effectively
-namespacing the header files. For example, instead of <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;abc.h&gt;</span></code>, a
-project should allow its users to use <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;namespace/abc.h&gt;</span></code>.</p>
-<p>Some projects namespace their headers within this subdirectory — for example,
-<code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;namespace/ns-abc.h&gt;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;namespace/abc.h&gt;</span></code>.
-This is redundant, but harmless.</p>
-<p>For example, for a project called ‘Walbottle’, the short namespace ‘Wbl’ would
+namespacing the header files. For example, instead of <code class="docutils literal notranslate"><span class="pre">#import</span> <span class="pre">&lt;Widget.h&gt;</span></code>, a
+project should allow its users to use <code class="docutils literal notranslate"><span class="pre">#import</span> <span class="pre">&lt;ThingamajigKit/TMKWidget.h&gt;</span></code>.</p>
+<p>For example, for a project called ‘Walbottle’, the short namespace <code class="docutils literal notranslate"><span class="pre">WBL</span></code> would
 be chosen. If it has a ‘schema’ class and a ‘writer’ class, it would install
 headers:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">$(includedir)/walbottle-$API_MAJOR/walbottle/schema.h</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$(includedir)/walbottle-$API_MAJOR/walbottle/writer.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;Walbottle/WBLSchema.h&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;Walbottle/WBLWriter.h&gt;</span></code></p></li>
 </ul>
-<p>(The use of <code class="docutils literal notranslate"><span class="pre">$API_MAJOR</span></code> above is for parallel installability.)</p>
 <p>For the schema class, the following symbols would be exported (amongst others),
-following GObject conventions:</p>
+following Objective-C conventions:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">WblSchema</span></code> structure</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">WblSchemaClass</span></code> structure</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">WBL_TYPE_SCHEMA</span></code> macro</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">WBL_IS_SCHEMA</span></code> macro</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">wbl_schema_get_type</span></code> function</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">wbl_schema_new</span></code> function</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">wbl_schema_load_from_data</span></code> function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WBLSchema</span></code> class</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-[WBLSchema</span> <span class="pre">init]</span></code> method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-[WBLSchema</span> <span class="pre">loadFromData:]</span></code> method</p></li>
 </ul>
 </section>
 
