@@ -18,6 +18,32 @@ Here are the most commonly used programming languages available for writing GNUs
 The GNUstep project recommends using the Objective-C or Objective-C++ programming language for libraries, as it allows the maximum support across multiple programming languages. Applications, on the other hand, can be written in Objective-C or in any programming languages that provides access to the Objective-C runtime through language bindings.
 :::
 
+:::{list-table}
+:widths: 10 10 10 70
+:header-rows: 1
+
+* - Language
+  - Project
+  - Documentation
+  - Notes
+* - Java
+  - [JIGS](https://home.gnustep.org/jigs/index.html)
+  - [JIGS Manual](https://home.gnustep.org/jigs/Manual/index.html)
+  - Not well-maintained
+* - Ruby
+  - [RIGS](https://gnustep.github.io/experience/RIGS.html)
+  - No documentation
+  - Not well-maintained
+* - StepTalk Smalltalk
+  - [StepTalk Smalltalk](https://mediawiki.gnustep.org/index.php/Smalltalk)
+  - [Documentation](https://github.com/gnustep/libs-steptalk/tree/master/Documentation)
+  - GNUstep's main scripting platform
+* - Objective-S
+  - [Objective-S](https://objective.st/)
+  - [Architecture](https://objective.st/About)
+  - Smalltalk dialect which has many unique features beyond standard Smalltalk
+:::
+
 <!-- ```{eval-rst}
 .. list-table::
   :widths: 10 10 10 70
