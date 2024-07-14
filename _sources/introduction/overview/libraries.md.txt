@@ -1,64 +1,84 @@
 # Libraries
 
-An overview of GNOME platform libraries.
+An overview of GNUstep platform libraries.
+
+## Foundational libraries
+
+### Objective-C Runtime (`objc`)
+
+The Objective-C Runtime provides dynamic object-oriented features, such as polymorphism, class creation, dynamic message sending, swizzling, and more. It also provides metadata about classes and protocols which are available, which can be useful to language bindings and advanced features.
+
+There are two Objective-C runtimes supported by GNUstep, the GCC runtime and the `libobjc2` runtime (Apple's `objc4` is also supported when running on macOS). `libobjc2` is much better, but requires using Clang as the compiler and is not packaged by most distributions. However, it's extremely easy to install `libobjc2` and the rest of GNUstep from source on any distribution that packages Clang and GNUstep's dependencies (i.e. almost any distribution supporting GNOME, KDE, or another XDG-compliant desktop).
+
+#### GCC runtime
+
+#### `libobjc2`
+
+### GNUstep Base (`Foundation`)
+
+GNUstep Base provides key data types for working in Objective-C, such as strings, dictionaries, and lists. It also provides networking, configuration storage, file manipulation, and more. It is completely compatible with OpenStep's Foundation Kit (except that it serializes objects differently), and has a very high level of compatibility with macOS's Foundation.
+
+- [Base API Reference (for parts which are compatible with Foundation)](https://wwwmain.gnustep.org/resources/documentation/Developer/Base/Reference/index.html)
+- [Base Additions API Reference](https://wwwmain.gnustep.org/resources/documentation/Developer/BaseAdditions/Reference/index.html)
+- [Base Programming Manual](https://wwwmain.gnustep.org/resources/documentation/Developer/Base/ProgrammingManual/manual_toc.html)
+
+### Core Foundation (`CoreFoundation`)
+
+
 
 ## User Interfaces
 
-GNOME's user interface libraries are used by all GNOME applications. They
+GNUstep's user interface libraries are used by all GNUstep applications. They
 provide everything you need to create a beautiful and easy to use interface for
 your app.
 
-### GTK
+### GNUstep GUI (`AppKit`)
 
-[GTK](https://www.gtk.org) is GNOME's user interface toolkit, and is a
+[GNUstep GUI](https://github.com/gnustep/libs-gui) is GNUstep's user interface toolkit, and is a
 comprehensive resource for creating application user interfaces. It includes
 a wide range of user interface widgets, as well as providing access to an array
-of system-level features.
+of system-level features. It has a near-perfect level of compatibility with OpenStep's
+Application Kit, and has a high level of compatibility with macOS's AppKit, especially for older apps.
 
-- [GTK4 API reference](https://docs.gtk.org/gtk4/)
+- [GUI API reference (for parts which are compatible with AppKit)](https://wwwmain.gnustep.org/resources/documentation/Developer/Gui/Reference/index.html)
+- [GUI Additions API reference](https://wwwmain.gnustep.org/resources/documentation/Developer/Gui/Additions/index.html)
+- [GUI Programming Manual](https://wwwmain.gnustep.org/resources/documentation/Developer/Gui/ProgrammingManual/AppKit_toc.html)
 
-### libadwaita
 
-Libadwaita supplements GTK with additional widgets and classes. It is used to
-implement the standard GNOME design patterns as documented in the GNOME
-Human Interface Guidelines.
-
-- [Libadwaita API reference](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/)
-
-### WebKitGTK
-
-WebKitGTK allows adding web functionality to applications, such as HTML
-rendering and embedded web views.
-
-- [WebKitGTK API reference](https://webkitgtk.org/reference/webkit2gtk/stable/index.html)
 
 ## Fonts & Rendering
 
-Simple text display and styling is provided by GTK. The GNOME platform also
-includes a set of lower-level font rendering and layout libraries, which apps
+Simple text display and styling is provided by GNUstep GUI. The GNUstep platform also
+will include a set of lower-level font rendering and layout libraries, which apps
 may sometimes need to use directly for more specialised font and typographic functionality.
 
-### Fontconfig
+### Fonts & Rendering on the XDG platform
+
+% TODO: Verify this
+
+The following libraries are used by GNUstep on the XDG platform (Linux or other Unix-like systems on X11 or Wayland).
+
+#### Fontconfig
 
 [Fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) provides
 access to the fonts that are available on the system. It provides detailed
 information about available fonts, as well as the ability to match fonts
 according to criteria such as language coverage.
 
-### FreeType
+#### FreeType
 
 [FreeType](https://www.freetype.org/) is a font rendering library used by
-the GNOME platform. Most applications are unlikely to need to use FreeType
+the GNUstep platform. Most applications are unlikely to need to use FreeType
 directly. However, it can be useful for specialist font and typographic
 features.
 
-### HarfBuzz
+#### HarfBuzz
 
 [HarfBuzz](https://harfbuzz.github.io/) is a text shaping library that is
-used by the GNOME platform. Most apps are unlikely to need to use HarfBuzz
+used by the GNUstep platform. Most apps are unlikely to need to use HarfBuzz
 directly, unless they include font or typographic features.
 
-### Pango
+#### Pango
 
 Pango is a text layout library. It plays an important role in
 internationalization, has full Unicode support, and supports a range of writing
@@ -68,57 +88,30 @@ setting text as bold or italic.
 - [Pango API reference](https://docs.gtk.org/Pango/)
 - [Pango Cairo API reference](https://docs.gtk.org/PangoCairo/)
 
-## Image Loading
+## 2D Drawing
 
-### gdk-pixbuf
+### Cairo
 
-gdk-pixbuf is an image loading library which is used by GTK. For simple loading
-and display of images, GTK can typically used on its own. However, gdk-pixbuf
-does provide useful functionality for operating on images as pixel buffers,
-such as changing colors or creating composites from multiple images, and saving
-the result.
-
-- [gdk-pixbuf API reference](https://docs.gtk.org/gdk-pixbuf/)
-
-### librsvg
-
-librsvg is a library that renders Scalable Vector Graphics (SVG).  It
-can be used to display static SVG assets from GTK and gdk-pixbuf, or
-to render SVG documents to [Cairo](https://cairographics.org) surfaces in general.
-
-- [librsvg API reference](https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/index.html)
-
-### glycin
-
-Glycin allows to decode images into [GdkTextures](https://docs.gtk.org/gdk4/class.Texture.html) and to extract image metadata.
-The image decoding happens in sandboxed, modular image loaders.
-
-- [Glycin project page](https://gitlab.gnome.org/sophie-h/glycin)
-- [Glycin Rust API reference](https://docs.rs/glycin/latest/glycin/)
-- [Glycin C API reference](https://sophie-h.pages.gitlab.gnome.org/glycin/c-api/)
-
-## 2D Drawing: Cairo
-
-Cairo can be used to draw custom 2D graphics. These can be embedded in GTK
-user interfaces, by drawing on GTK widgets. Graphics can also be outputted to
+Cairo can be used to draw custom 2D graphics. These can be embedded in GNUstep
+user interfaces <!-- TODO: How? -->. Graphics can also be outputted to
 PDF and SVG. Cairo graphics are resolution-independent and antialiased.
 
 - [Cairo API reference](https://cairographics.org/manual/)
 
-## File System Access & Operations: GFile
+### Opal (`CoreGraphics`)
 
-GIO provides a powerful virtual file system abstraction layer. Its GFile
-interface can be used to read information from the filesystem (such as
-traversing directories, querying file metadata, and so on) as well as and
-carrying out file operations. GFile can also be used to monitor files and
-directories for changes.
+[Opal](https://github.com/gnustep/libs-opal) is GNUstep's wrapper around Cairo, which provides a similar API to macOS's CoreGraphics/Quartz 2D frameworks. It also provides ways to connect Cairo with GNUstep GUI.
 
-- [GFile API Reference](https://docs.gtk.org/gio/iface.File.html)
+## IPC
 
-## IPC: GDBus
+### Distributed Objects
+
+
+
+### DBusKit
 
 [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/) is one of the
-primary IPC systems used in GNOME, and is used for communication between both
+primary IPC systems used in GNUstep, and is used for communication between both
 applications and services. Applications can use D-Bus to communicate with
 system services, such as hardware-related daemons, or for communication between
 their own processes.
@@ -127,128 +120,44 @@ GDBus is included in the GIO library, and provides a comprehensive
 implementation of the D-Bus protocol, as well as high-level API to implement
 both providers and consumers of D-Bus interfaces.
 
-## Multimedia: GStreamer
-
-GTK 4 includes its own built-in video playback capability, which can be used
-for simple video playback. For other multimedia requirements, GStreamer is an
-integrated part of the GNOME platform, and can be used for simple audio
-and video playback, through to complex non-linear multimedia editing.
-
-- [GStreamer API reference](https://gstreamer.freedesktop.org/documentation/)
-
-## Settings: GSettings
-
-GSettings is the GNOME library for reading and writing user settings. It
-allows storing a variety of settings types, including integers and arrays of
-strings.
-
-- [GSettings API reference](https://docs.gtk.org/gio/class.Settings.html)
+## Settings: Defaults
 
 ## Data Storage
 
-The GNOME platform includes a variety of different data storage libraries,
+The GNUstep platform includes a variety of different data storage libraries,
 which are suitable for a range of requirements and needs.
 
-### GMarkup
+### Foundation XML
 
-GMarkup is an XML parser which can be used to read/write simple XML. It is
-appropriate for data which is read and written by the same app and not shared
-between programs.
+### Foundation JSON
 
-- [GMarkup API reference](https://docs.gtk.org/glib/struct.MarkupParseContext.html)
+### GDL2
 
-### libxml2
+**TODO: Is this correct?**
 
-Libxml2 is a highly compliant XML parser/generator. It is suited to reading and
-writing XML that is shared between different projects, and has a defined
-specification and XML schema. Example uses of libxml2 include document rendering
-and editing.
-
-- [Libxml2 reference manual](http://www.xmlsoft.org/html/index.html)
-
-### Keyfiles
-
-Key-value files are [INI-like](https://en.wikipedia.org/wiki/INI_file) files
-that can be used to store (grouped) key/value pairs. An example of key-value
-files are the [desktop files](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html)
-used to describe applications.
-
-- [GKeyFile API reference](https://docs.gtk.org/glib/struct.KeyFile.html)
-
-### JSON-GLib
-
-JSON-GLib implements a full JSON parser and generator using GLib and GObject,
-and integrates JSON with GLib data types.
-
-- [JSON-GLib API reference](https://gnome.pages.gitlab.gnome.org/json-glib/)
-
-### GDA
-
-libgda is a library which provides access to multiple SQL-based relational
+[GDL2](https://github.com/gnustep/libs-gdl2) is a library which provides access to multiple SQL-based relational
 databases, including SQLite, MySQL, Postgres, MSAccess and more. Databases can
 either be local or remotely hosted. libgda includes a number of tools,
 including a SQL console, a data sources administration tool, and a database
-browser.
+browser. GDL2's API is similar to NeXT's Enterprise Objects Framework.
 
-- [GDA project page](https://gitlab.gnome.org/GNOME/libgda)
+- [GDL2 API reference](https://wwwmain.gnustep.org/resources/documentation/Developer/GDL2/GDL2.html)
 
-### GOM
-
-GOM is a [data mapper](https://en.m.wikipedia.org/wiki/Data_mapper_pattern)
-for SQLite. It supports asynchronoous fetching and many-to-many tables, and
-helps with building search queries and database migrations.
-
-- [GOM project page](https://gitlab.gnome.org/GNOME/gom)
-
-### Tracker SPARQL
-
-libtracker-sparql allows your app to store, query and publish structured data
-using [RDF](https://en.wikipedia.org/wiki/Resource_Description_Framework).
-It is based around [SQLite](http://sqlite.org/) with a SPARQL translation
-layer that adds many additional features.
-
-- [Tracker SPARQL documentation](https://gnome.pages.gitlab.gnome.org/tracker/docs/developer/index.html)
+## GNUstep CoreData (`CoreData`)
 
 ## Networking
 
-GNOME libraries provide access to a range of networking functionality and
+GNUstep libraries provide access to a range of networking functionality and
 features.
 
-### GSocket
-
-GIO includes high-level network features, such as monitoring the network state
-of the system, creating network connections, implementing network services, and
-accepting client connections.
-
-GIO also provides a comprehensive set of low level networking APIs to abstract
-sockets, addresses, and proxies.
-
-- [GSocket documentation](https://docs.gtk.org/gio/class.Socket.html)
+### Foundation Networking
 
 ### TLS & DNS support
 
-GIO provides support for [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+**TODO: Is this correct?**
+
+Foundation provides support for [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security)
 connections, both client and server side. It also supports resolvers for
 proxies, names and services.
 
 - [TLS Overview](https://docs.gtk.org/gio/tls-overview.html)
-
-### Avahi
-
-[Avahi](http://avahi.org/) implements [Zeroconf Networking](https://en.wikipedia.org/wiki/Zero-configuration_networking).
-It allows programs to discover services like printers on local networks without
-prior configuration. It also allows applications to set up services that are
-reachable through the local network without configuration; for example, a chat
-program that "finds" other chat users in a LAN without having to set up a
-central chat server first.
-
-### Soup
-
-Soup is an HTTP library designed to be used in graphical applications. It uses
-asynchronous operations to avoid blocking the user interface while network
-requests are being made.
-
-Soup provides functionality for using HTTP cookies, SSL encrypted connections,
-and the XML-RPC protocol based on HTTP.
-
-- [Soup reference manual](https://libsoup.org/libsoup-3.0/index.html)
