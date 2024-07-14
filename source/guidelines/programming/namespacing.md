@@ -17,41 +17,33 @@ filename in a project, grouping symbols into their projects and separating them
 from others.
 
 The conventions below should be used for namespacing all symbols. They are used
-in all GLib-based projects, so should be familiar to a lot of developers:
+in all Cocoa and Carbon programs, so should be familiar to a lot of developers:
 
-- Functions should use `lower_case_with_underscores` (also known as *snake
-  case*).
-- Structures, types and objects should use `CamelCaseWithoutUnderscores`.
-- Macros and constants should use `UPPER_CASE_WITH_UNDERSCORES`.
-- All symbols should be prefixed with a short (2–4 characters) version of the
+- Functions should use `camelCaseWithoutUnderscores`.
+- Structures and types should use `CamelCaseWithoutUnderscores`.
+- Macros and constants should use `UPPER_CASE_WITH_UNDERSCORES` or `kCamelCaseWithoutUnderscores` (the `k` represents "constant").
+- `const` variables and global objects should use `kCamelCaseWithoutUnderscores` (the `k` represents "constant").
+- All symbols should be prefixed with a short (3–4 characters) all-caps version of the
   namespace. This is shortened purely for ease of typing, but should still be
   unique.
-- All methods of a class should also be prefixed with the class name.
+  - While many existing namespaces are only 2 characters, we recommend that you do not create new 2-character namespaces because it's likely that they will conflict with existing namespaces, and Apple will create as many 2-character namespaces as they'd like regardless of whether it breaks your application.
+- All methods of a CoreFoundation/Carbon class should also be prefixed with the class name.
+- All methods of an Objective-C/Cocoa class should use `camelCaseWithoutUnderscores`.
 
 Additionally, public headers should be included from a subdirectory, effectively
-namespacing the header files. For example, instead of `#include <abc.h>`, a
-project should allow its users to use `#include <namespace/abc.h>`.
+namespacing the header files. For example, instead of `#import <Widget.h>`, a
+project should allow its users to use `#import <ThingamajigKit/TMKWidget.h>`.
 
-Some projects namespace their headers within this subdirectory — for example,
-`#include <namespace/ns-abc.h>` instead of `#include <namespace/abc.h>`.
-This is redundant, but harmless.
-
-For example, for a project called ‘Walbottle’, the short namespace ‘Wbl’ would
+For example, for a project called ‘Walbottle’, the short namespace `WBL` would
 be chosen. If it has a ‘schema’ class and a ‘writer’ class, it would install
 headers:
 
-- `$(includedir)/walbottle-$API_MAJOR/walbottle/schema.h`
-- `$(includedir)/walbottle-$API_MAJOR/walbottle/writer.h`
-
-(The use of `$API_MAJOR` above is for parallel installability.)
+- `<Walbottle/WBLSchema.h>`
+- `<Walbottle/WBLWriter.h>`
 
 For the schema class, the following symbols would be exported (amongst others),
-following GObject conventions:
+following Objective-C conventions:
 
-- `WblSchema` structure
-- `WblSchemaClass` structure
-- `WBL_TYPE_SCHEMA` macro
-- `WBL_IS_SCHEMA` macro
-- `wbl_schema_get_type` function
-- `wbl_schema_new` function
-- `wbl_schema_load_from_data` function
+- `WBLSchema` class
+- `-[WBLSchema init]` method
+- `-[WBLSchema loadFromData:]` method
